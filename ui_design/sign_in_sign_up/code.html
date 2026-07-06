@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripCraft - Authenticate</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & Courier Prime -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Courier+Prime&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e2e2e2",
+                    "primary-fixed": "#e2e2e2",
+                    "secondary-fixed-dim": "#c7c6c6",
+                    "background": "#f9f9f9",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#4c4546",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#e4e2e2",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dadada",
+                    "on-surface": "#1a1c1c",
+                    "on-primary-fixed-variant": "#474747",
+                    "tertiary-container": "#1a1c1c",
+                    "on-tertiary-container": "#838484",
+                    "on-secondary-fixed-variant": "#464747",
+                    "on-background": "#1a1c1c",
+                    "hover-fill": "#EFEFEF",
+                    "surface-variant": "#e2e2e2",
+                    "surface-container-low": "#f3f3f3",
+                    "outline-variant": "#cfc4c5",
+                    "inverse-surface": "#2f3131",
+                    "error-container": "#ffdad6",
+                    "primary": "#000000",
+                    "on-secondary-container": "#626262",
+                    "text-secondary": "#5F5E5B",
+                    "outline": "#7e7576",
+                    "surface-tint": "#5e5e5e",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "border-muted": "#D1D1D1",
+                    "surface-container-lowest": "#ffffff",
+                    "status-success": "#1976D2",
+                    "border-subtle": "#EBEBEB",
+                    "surface-container-high": "#e8e8e8",
+                    "inverse-on-surface": "#f1f1f1",
+                    "tertiary-fixed": "#e3e2e2",
+                    "on-primary-fixed": "#1b1b1b",
+                    "on-tertiary-fixed-variant": "#464747",
+                    "inverse-primary": "#c6c6c6",
+                    "bg-canvas": "#FFFFFF",
+                    "secondary": "#5e5e5e",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface-bright": "#f9f9f9",
+                    "text-main": "#1A1A1A",
+                    "primary-container": "#1b1b1b",
+                    "tertiary": "#000000",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#c7c6c6",
+                    "surface-container": "#eeeeee",
+                    "secondary-container": "#e1dfdf",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f9f9f9",
+                    "primary-fixed-dim": "#c6c6c6",
+                    "on-primary-container": "#848484"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gap-md": "16px",
+                    "margin-page": "48px",
+                    "gap-xs": "4px",
+                    "gap-lg": "24px",
+                    "gap-sm": "8px",
+                    "base": "4px",
+                    "max-width-content": "900px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "code": ["Courier Prime"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "code": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1A1A1A;
+        }
+        .auth-card {
+            max-width: 400px;
+            width: 100%;
+        }
+        input:focus {
+            outline: none;
+            border-color: #000000 !important;
+            box-shadow: none !important;
+        }
+        .transition-soft {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-bg-canvas min-h-screen flex flex-col items-center justify-center px-margin-mobile md:px-0">
+<!-- Auth Shell -->
+<main class="auth-card flex flex-col items-center">
+<!-- Brand Header -->
+<div class="mb-gap-lg text-center">
+<h1 class="font-display text-display text-primary tracking-tight mb-base">TripCraft</h1>
+<p class="font-body-lg text-body-lg text-text-secondary">Welcome back</p>
+</div>
+<!-- Social Login Component -->
+<div class="w-full space-y-gap-sm mb-gap-lg">
+<button class="w-full flex items-center justify-center gap-sm px-gap-md py-gap-sm border border-border-muted rounded bg-bg-canvas font-body-md text-body-md text-primary transition-soft hover:bg-hover-fill active:opacity-80">
+<svg height="18" viewbox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.64 9.20455C17.64 8.56636 17.5827 7.95273 17.4764 7.36364H9V10.845H13.8436C13.635 11.97 13.0009 12.9232 12.0477 13.5614V15.8195H14.9564C16.6582 14.2527 17.64 11.9455 17.64 9.20455Z" fill="#4285F4"></path>
+<path d="M9 18C11.43 18 13.4673 17.1941 14.9564 15.8195L12.0477 13.5614C11.2418 14.1014 10.2109 14.4205 9 14.4205C6.65591 14.4205 4.67182 12.8373 3.96409 10.71H0.957275V13.0418C2.43818 15.9832 5.48182 18 9 18Z" fill="#34A853"></path>
+<path d="M3.96409 10.71C3.78409 10.17 3.68182 9.59318 3.68182 9C3.68182 8.40682 3.78409 7.83 3.96409 7.29V4.95818H0.957275C0.347727 6.17318 0 7.54773 0 9C0 10.4523 0.347727 11.8268 0.957275 13.0418L3.96409 10.71Z" fill="#FBBC05"></path>
+<path d="M9 3.57955C10.3214 3.57955 11.5077 4.03364 12.4405 4.92545L15.0218 2.34409C13.4632 0.891818 11.4259 0 9 0C5.48182 0 2.43818 2.01682 0.957275 4.95818L3.96409 7.29C4.67182 5.16273 6.65591 3.57955 9 3.57955Z" fill="#EA4335"></path>
+</svg>
+                Continue with Google
+            </button>
+<button class="w-full flex items-center justify-center gap-sm px-gap-md py-gap-sm border border-border-muted rounded bg-bg-canvas font-body-md text-body-md text-primary transition-soft hover:bg-hover-fill active:opacity-80">
+<span class="material-symbols-outlined text-[18px]">apps</span>
+                Continue with Apple
+            </button>
+</div>
+<!-- Divider -->
+<div class="w-full flex items-center gap-md mb-gap-lg">
+<div class="h-[1px] flex-grow bg-border-subtle"></div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">or</span>
+<div class="h-[1px] flex-grow bg-border-subtle"></div>
+</div>
+<!-- Email Login Form -->
+<form class="w-full space-y-gap-md" onsubmit="event.preventDefault();">
+<div class="space-y-base">
+<label class="font-label-md text-label-md text-text-secondary ml-base" for="email">Email</label>
+<input class="w-full px-gap-md py-gap-sm border border-border-subtle rounded font-body-md text-body-md text-primary bg-bg-canvas transition-soft focus:border-primary" id="email" placeholder="Enter your email address..." type="email"/>
+</div>
+<div class="space-y-base">
+<div class="flex justify-between items-center px-base">
+<label class="font-label-md text-label-md text-text-secondary" for="password">Password</label>
+<a class="font-label-md text-label-md text-text-secondary hover:text-primary transition-colors" href="#">Forgot?</a>
+</div>
+<input class="w-full px-gap-md py-gap-sm border border-border-subtle rounded font-body-md text-body-md text-primary bg-bg-canvas transition-soft focus:border-primary" id="password" placeholder="Enter your password..." type="password"/>
+</div>
+<button class="w-full py-gap-sm bg-primary text-on-primary font-body-md text-body-md rounded transition-soft hover:opacity-90 active:opacity-80" type="submit">
+                Continue
+            </button>
+</form>
+<!-- Footer Actions -->
+<footer class="mt-gap-lg pt-gap-lg border-t border-border-subtle w-full text-center">
+<p class="font-body-md text-body-md text-text-secondary mb-gap-sm">
+                New to TripCraft?
+            </p>
+<a class="inline-flex items-center gap-xs font-body-md text-body-md text-primary hover:underline decoration-1 underline-offset-4 transition-soft group" href="#">
+                Start planning anonymously
+                <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+<div class="mt-margin-page flex justify-center gap-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</footer>
+</main>
+<!-- Visual Element: Subtle background accent -->
+<div class="fixed top-0 left-0 w-full h-1 bg-primary"></div>
+<!-- Micro-interaction script -->
+<script>
+        // Simple input focus effects or validation placeholders
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label').style.color = '#000000';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label').style.color = '#5F5E5B';
+            });
+        });
+
+        // Toggle Password visibility logic could be added here if needed
+    </script>
+</body></html>

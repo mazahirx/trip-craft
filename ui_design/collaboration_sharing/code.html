@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Share & Collaborate - TripCraft</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#1b1c1c",
+                    "bg-canvas": "#FFFFFF",
+                    "on-error": "#ffffff",
+                    "surface": "#f9f9f9",
+                    "border-muted": "#D1D1D1",
+                    "hover-fill": "#EFEFEF",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#e3e2e2",
+                    "outline": "#7e7576",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f1f1f1",
+                    "surface-variant": "#e2e2e2",
+                    "surface-dim": "#dadada",
+                    "secondary-fixed": "#e4e2e2",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container": "#eeeeee",
+                    "inverse-primary": "#c6c6c6",
+                    "on-tertiary-fixed-variant": "#464747",
+                    "tertiary-container": "#1a1c1c",
+                    "text-main": "#1A1A1A",
+                    "background": "#f9f9f9",
+                    "on-surface": "#1a1c1c",
+                    "surface-tint": "#5e5e5e",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#000000",
+                    "on-secondary-fixed-variant": "#464747",
+                    "primary-fixed": "#e2e2e2",
+                    "error": "#ba1a1a",
+                    "primary-container": "#1b1b1b",
+                    "tertiary-fixed-dim": "#c7c6c6",
+                    "border-subtle": "#EBEBEB",
+                    "on-primary-fixed": "#1b1b1b",
+                    "status-success": "#1976D2",
+                    "inverse-surface": "#2f3131",
+                    "secondary-container": "#e1dfdf",
+                    "secondary": "#5e5e5e",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-primary-fixed-variant": "#474747",
+                    "primary": "#000000",
+                    "on-surface-variant": "#4c4546",
+                    "outline-variant": "#cfc4c5",
+                    "secondary-fixed-dim": "#c7c6c6",
+                    "on-primary-container": "#848484",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#626262",
+                    "text-secondary": "#5F5E5B",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface-container-highest": "#e2e2e2",
+                    "primary-fixed-dim": "#c6c6c6",
+                    "surface-container-low": "#f3f3f3",
+                    "on-tertiary-container": "#838484"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-page": "48px",
+                    "gap-md": "16px",
+                    "base": "4px",
+                    "gap-xs": "4px",
+                    "max-width-content": "900px",
+                    "gap-sm": "8px",
+                    "gap-lg": "24px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .avatar-ring {
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #000000;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d1d1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #5e5e5e;
+        }
+    </style>
+</head>
+<body class="bg-bg-canvas text-text-main font-body-md antialiased">
+<!-- Sidebar Navigation -->
+<aside class="hidden md:flex flex-col h-full py-gap-lg px-gap-md bg-surface border-r border-border-subtle h-screen w-64 fixed left-0 top-0 z-50">
+<div class="mb-gap-lg">
+<h1 class="text-headline-md font-headline-md text-primary">TripCraft</h1>
+<p class="text-label-md text-text-secondary mt-1">Minimal Travel Planning</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-sm px-3 py-2 text-text-secondary hover:bg-hover-fill transition-colors cursor-pointer group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="map">map</span>
+<span class="font-body-md">My Trips</span>
+</a>
+<a class="flex items-center gap-sm px-3 py-2 text-text-secondary hover:bg-hover-fill transition-colors cursor-pointer group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="layers">layers</span>
+<span class="font-body-md">Templates</span>
+</a>
+<a class="flex items-center gap-sm px-3 py-2 text-text-secondary hover:bg-hover-fill transition-colors cursor-pointer group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-border-subtle pt-gap-md space-y-1">
+<a class="flex items-center gap-sm px-3 py-2 text-text-secondary hover:bg-hover-fill transition-colors cursor-pointer group" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-md">Help</span>
+</a>
+<a class="flex items-center gap-sm px-3 py-2 text-text-secondary hover:bg-hover-fill transition-colors cursor-pointer group" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] z-40 bg-bg-canvas border-b border-border-subtle">
+<div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-page max-w-max-width-content mx-auto">
+<div class="flex items-center gap-md">
+<span class="md:hidden material-symbols-outlined cursor-pointer" data-icon="menu">menu</span>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Share & Collaborate</h2>
+</div>
+<div class="flex items-center gap-gap-md">
+<button class="hidden md:flex items-center px-4 py-1.5 border border-border-muted hover:bg-hover-fill transition-colors font-label-md text-label-md">
+                    Share
+                </button>
+<button class="bg-primary text-on-primary px-4 py-1.5 hover:opacity-90 transition-opacity font-label-md text-label-md">
+                    Save
+                </button>
+<span class="material-symbols-outlined cursor-pointer text-text-secondary" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-12 px-margin-mobile md:ml-64 md:px-margin-page">
+<div class="max-w-max-width-content mx-auto">
+<section class="mb-gap-lg">
+<div class="flex items-center justify-between mb-gap-md">
+<h3 class="font-headline-md text-headline-md text-main">Access Links</h3>
+<span class="text-label-md text-text-secondary">2 Active Links</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gap-md">
+<!-- Share Card: Edit -->
+<div class="p-gap-md border border-border-subtle hover:border-text-main transition-colors group relative overflow-hidden">
+<div class="flex items-center justify-between mb-gap-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-text-secondary" data-icon="edit">edit</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Editor Link</span>
+</div>
+<span class="h-2 w-2 rounded-full bg-status-success"></span>
+</div>
+<p class="text-body-md text-text-secondary mb-gap-md">Full permission to add, move, or delete itinerary blocks.</p>
+<div class="flex items-center gap-xs">
+<code class="bg-surface px-3 py-2 flex-1 font-code text-code text-text-secondary truncate">tripcraft.io/s/ed-92kxl-0</code>
+<button class="p-2 border border-border-subtle hover:bg-hover-fill transition-colors" title="Copy link">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Share Card: View Only -->
+<div class="p-gap-md border border-border-subtle hover:border-text-main transition-colors group relative overflow-hidden">
+<div class="flex items-center justify-between mb-gap-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-text-secondary" data-icon="visibility">visibility</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Viewer Link</span>
+</div>
+</div>
+<p class="text-body-md text-text-secondary mb-gap-md">Read-only access for family or friends to follow the journey.</p>
+<div class="flex items-center gap-xs">
+<code class="bg-surface px-3 py-2 flex-1 font-code text-code text-text-secondary truncate">tripcraft.io/s/vw-41pqr-8</code>
+<button class="p-2 border border-border-subtle hover:bg-hover-fill transition-colors" title="Copy link">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Travel Companions Section -->
+<section class="mb-gap-lg">
+<div class="flex items-center justify-between mb-gap-md">
+<h3 class="font-headline-md text-headline-md text-main">Travel Companions</h3>
+<button class="text-label-md font-label-md text-primary hover:underline flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
+                        Invite Member
+                    </button>
+</div>
+<div class="border border-border-subtle divide-y divide-border-subtle">
+<!-- Member Row: Owner -->
+<div class="flex items-center justify-between p-gap-md hover:bg-surface transition-colors">
+<div class="flex items-center gap-gap-md">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-on-primary font-bold overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist black and white headshot portrait of a professional traveler, soft studio lighting, sharp focus on eyes, ultra-modern clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSZk_R6To079jH3DOAlrkr4tlu9mBxHNKaviRgBBDjLtlS9fLUxJQx4FSH4yCWtJNLkOu6nN8Ks3jA6yXUAaqdRRRcpLfYn4nau7B_je0-6Lau5lo_YfbUsKYSk5CjiGeDSRoVDTyPN0xekMmKviT7dOkfyMKXgyaJGorGeuS1kO0XDtMcmHCPT2IbxdoAbZrhYAHKIwudZbXxEdRET4-VjDSmu474MfaQIG26de50RQ6KhbTCsppF"/>
+</div>
+<div>
+<p class="font-body-md font-semibold">Julian V.</p>
+<p class="text-label-md text-text-secondary">Owner · julian@tripcraft.app</p>
+</div>
+</div>
+<div class="flex items-center gap-gap-sm">
+<span class="px-2 py-0.5 bg-hover-fill text-label-md font-label-md rounded-sm">Active Now</span>
+<span class="material-symbols-outlined text-text-secondary opacity-0">lock</span>
+</div>
+</div>
+<!-- Member Row: Editor -->
+<div class="flex items-center justify-between p-gap-md hover:bg-surface transition-colors">
+<div class="flex items-center gap-gap-md">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-[#D1D1D1] text-primary font-bold overflow-hidden border-2 border-[#1976D2]">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of a stylish woman with glasses in a bright minimalist setting, high-key lighting, neutral tones, professional digital photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRDXD77TSmxY_mgc8rWurRmp-wFNRm0TlKq_R136tPvdVDrU_BoJTBOPWCHalwklr5FYnQXU8Gf_YMxHurCZGRufTvwXKBS3o_GrKAsQMEjZw8qNwP-7Woh1mf82TwNAVzvsodSm0veYmXVcuLeKhNrhbi1mttljdk4LnOJP6qUBFRr6WkilE5rW9ZpSjhkYmjKuZHMjnPaTDHgTeenmY9734xTmNLgNKEWnbm3axlnzBzkKWnnRUR"/>
+</div>
+<div>
+<p class="font-body-md font-semibold">Sarah Chen</p>
+<p class="text-label-md text-text-secondary">Editor · sarah.c@email.com</p>
+</div>
+</div>
+<div class="flex items-center gap-gap-sm">
+<select class="bg-transparent border-none text-label-md font-label-md text-text-secondary focus:ring-0 p-0 pr-6 cursor-pointer">
+<option>Can Edit</option>
+<option>Can View</option>
+<option class="text-error">Remove</option>
+</select>
+</div>
+</div>
+<!-- Member Row: Guest -->
+<div class="flex items-center justify-between p-gap-md hover:bg-surface transition-colors opacity-70">
+<div class="flex items-center gap-gap-md">
+<div class="w-10 h-10 rounded-full bg-hover-fill flex items-center justify-center text-text-secondary border-2 border-dashed border-border-muted">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<div>
+<p class="font-body-md font-semibold text-text-secondary italic">Anonymous Explorer</p>
+<p class="text-label-md text-text-secondary">Guest · Joined via public link</p>
+</div>
+</div>
+<div class="flex items-center gap-gap-sm">
+<span class="text-label-md text-text-secondary">Last seen 2h ago</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Collaboration Settings -->
+<section>
+<h3 class="font-headline-md text-headline-md text-main mb-gap-md">Settings</h3>
+<div class="space-y-gap-md">
+<!-- Setting Item: Sessions -->
+<div class="flex items-start justify-between p-gap-md border border-border-subtle">
+<div class="flex-1 pr-gap-lg">
+<p class="font-body-md font-semibold text-main">Require Registration</p>
+<p class="text-body-md text-text-secondary mt-1">If enabled, guests must sign in to TripCraft before they can view or edit this itinerary. Prevents anonymous access.</p>
+</div>
+<div class="flex items-center h-6">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container border border-border-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Setting Item: Live Presence -->
+<div class="flex items-start justify-between p-gap-md border border-border-subtle">
+<div class="flex-1 pr-gap-lg">
+<p class="font-body-md font-semibold text-main">Live Cursor Presence</p>
+<p class="text-body-md text-text-secondary mt-1">See exactly where your companions are working in real-time. Helpful for large, multi-day coordination.</p>
+</div>
+<div class="flex items-center h-6">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container border border-border-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Setting Item: Notifications -->
+<div class="flex items-start justify-between p-gap-md border border-border-subtle">
+<div class="flex-1 pr-gap-lg">
+<p class="font-body-md font-semibold text-main">Change Notifications</p>
+<p class="text-body-md text-text-secondary mt-1">Receive an email summary when companions make major adjustments to the travel timeline or budget.</p>
+</div>
+<div class="flex items-center h-6">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container border border-border-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Danger Zone -->
+<section class="mt-16 pt-gap-lg border-t border-border-subtle">
+<div class="flex items-center justify-between">
+<div>
+<p class="font-body-md font-semibold text-error">Revoke All Access</p>
+<p class="text-body-md text-text-secondary mt-1">Immediately disable all shared links and remove all companions except yourself.</p>
+</div>
+<button class="px-4 py-2 border border-error text-error hover:bg-error-container/10 transition-colors font-label-md text-label-md">
+                        Revoke Access
+                    </button>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Mobile Nav -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface border-t border-border-subtle flex justify-around py-3 z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" data-icon="map" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="text-[10px] font-label-md">Trips</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="text-[10px] font-label-md">Templates</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="text-[10px] font-label-md font-bold">Collab</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-label-md">Settings</span>
+</button>
+</nav>
+<!-- Micro-interaction script -->
+<script>
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => btn.classList.add('opacity-70'));
+            btn.addEventListener('mouseup', () => btn.classList.remove('opacity-70'));
+            btn.addEventListener('mouseleave', () => btn.classList.remove('opacity-70'));
+        });
+
+        // Simple toggle state simulation for checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const parent = this.closest('.border');
+                if(this.checked) {
+                    parent.classList.add('border-primary');
+                    parent.classList.remove('border-border-subtle');
+                } else {
+                    parent.classList.remove('border-primary');
+                    parent.classList.add('border-border-subtle');
+                }
+            });
+        });
+    </script>
+</body></html>
