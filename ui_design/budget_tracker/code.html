@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripCraft - Trip Budget</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Courier+Prime&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#1b1c1c",
+                    "bg-canvas": "#FFFFFF",
+                    "on-error": "#ffffff",
+                    "surface": "#f9f9f9",
+                    "border-muted": "#D1D1D1",
+                    "hover-fill": "#EFEFEF",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#e3e2e2",
+                    "outline": "#7e7576",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f1f1f1",
+                    "surface-variant": "#e2e2e2",
+                    "surface-dim": "#dadada",
+                    "secondary-fixed": "#e4e2e2",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container": "#eeeeee",
+                    "inverse-primary": "#c6c6c6",
+                    "on-tertiary-fixed-variant": "#464747",
+                    "tertiary-container": "#1a1c1c",
+                    "text-main": "#1A1A1A",
+                    "background": "#f9f9f9",
+                    "on-surface": "#1a1c1c",
+                    "surface-tint": "#5e5e5e",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#000000",
+                    "on-secondary-fixed-variant": "#464747",
+                    "primary-fixed": "#e2e2e2",
+                    "error": "#ba1a1a",
+                    "primary-container": "#1b1b1b",
+                    "tertiary-fixed-dim": "#c7c6c6",
+                    "border-subtle": "#EBEBEB",
+                    "on-primary-fixed": "#1b1b1b",
+                    "status-success": "#1976D2",
+                    "inverse-surface": "#2f3131",
+                    "secondary-container": "#e1dfdf",
+                    "secondary": "#5e5e5e",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-primary-fixed-variant": "#474747",
+                    "primary": "#000000",
+                    "on-surface-variant": "#4c4546",
+                    "outline-variant": "#cfc4c5",
+                    "secondary-fixed-dim": "#c7c6c6",
+                    "on-primary-container": "#848484",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#626262",
+                    "text-secondary": "#5F5E5B",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface-container-highest": "#e2e2e2",
+                    "primary-fixed-dim": "#c6c6c6",
+                    "surface-container-low": "#f3f3f3",
+                    "on-tertiary-container": "#838484"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-page": "48px",
+                    "gap-md": "16px",
+                    "base": "4px",
+                    "gap-xs": "4px",
+                    "max-width-content": "900px",
+                    "gap-sm": "8px",
+                    "gap-lg": "24px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "code": ["Courier Prime"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "code": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #FFFFFF;
+        }
+        /* Custom thin borders for Notion aesthetic */
+        .hairline-border {
+            border-bottom: 0.5px solid #EBEBEB;
+        }
+        .sidebar-active {
+            background-color: #EFEFEF;
+            color: #000000 !important;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="font-body-md text-text-main selection:bg-surface-variant">
+<!-- SideNavBar -->
+<aside class="bg-surface dark:bg-surface-container font-body-md text-body-md h-screen w-64 fixed left-0 top-0 border-r border-border-subtle dark:border-outline-variant flex flex-col h-full py-gap-lg px-gap-md z-50" id="sidebar">
+<div class="mb-gap-lg">
+<h1 class="text-headline-md font-headline-md text-primary dark:text-on-primary font-bold tracking-tight">TripCraft</h1>
+<p class="text-text-secondary text-label-md font-label-md mt-1">Minimal Travel Planning</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-sm px-2 py-1.5 rounded transition-colors hover:bg-hover-fill dark:hover:bg-surface-container-high text-text-secondary dark:text-on-surface-variant cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-body-md text-body-md">My Trips</span>
+</a>
+<a class="flex items-center gap-sm px-2 py-1.5 rounded transition-colors hover:bg-hover-fill dark:hover:bg-surface-container-high sidebar-active text-primary font-semibold bg-hover-fill dark:bg-tertiary-container cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="font-body-md text-body-md">Templates</span>
+</a>
+<a class="flex items-center gap-sm px-2 py-1.5 rounded transition-colors hover:bg-hover-fill dark:hover:bg-surface-container-high text-text-secondary dark:text-on-surface-variant cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 pt-gap-lg border-t border-border-subtle">
+<a class="flex items-center gap-sm px-2 py-1.5 rounded transition-colors hover:bg-hover-fill dark:hover:bg-surface-container-high text-text-secondary dark:text-on-surface-variant cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-md text-body-md">Help</span>
+</a>
+<a class="flex items-center gap-sm px-2 py-1.5 rounded transition-colors hover:bg-hover-fill dark:hover:bg-surface-container-high text-text-secondary dark:text-on-surface-variant cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="bg-canvas dark:bg-background fixed top-0 right-0 w-[calc(100%-16rem)] z-40 border-b border-border-subtle dark:border-outline-variant">
+<div class="flex justify-between items-center h-16 px-margin-page max-w-max-width-content mx-auto">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary">Trip Budget</span>
+</div>
+<div class="flex items-center gap-gap-md">
+<button class="text-text-secondary hover:text-primary transition-colors text-body-md font-body-md px-3 py-1 duration-200 ease-in-out">Share</button>
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-lg text-body-md font-body-md font-medium hover:opacity-90 transition-all duration-200 ease-in-out">Save</button>
+<button class="text-text-secondary hover:text-primary transition-colors duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-16 pb-24">
+<div class="max-w-max-width-content mx-auto px-margin-page mt-12">
+<!-- Real-time Total Display -->
+<section class="mb-12">
+<div class="flex flex-col gap-xs">
+<span class="text-label-md font-label-md text-text-secondary tracking-widest uppercase">Total Estimated Expenditure</span>
+<div class="flex items-baseline gap-sm">
+<span class="font-display text-display text-primary">$4,285.00</span>
+<span class="text-status-success font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_down">trending_down</span>
+                            12% under budget
+                        </span>
+</div>
+</div>
+<!-- Category Summary (Bento-style visualization) -->
+<div class="grid grid-cols-4 gap-md mt-8">
+<div class="p-4 bg-surface rounded-xl border border-border-subtle group hover:border-outline transition-all">
+<span class="material-symbols-outlined text-text-secondary mb-2" data-icon="flight">flight</span>
+<div class="text-label-md font-label-md text-text-secondary">Transport</div>
+<div class="font-headline-md text-headline-md">$1,240</div>
+</div>
+<div class="p-4 bg-surface rounded-xl border border-border-subtle group hover:border-outline transition-all">
+<span class="material-symbols-outlined text-text-secondary mb-2" data-icon="hotel">hotel</span>
+<div class="text-label-md font-label-md text-text-secondary">Stay</div>
+<div class="font-headline-md text-headline-md">$2,100</div>
+</div>
+<div class="p-4 bg-surface rounded-xl border border-border-subtle group hover:border-outline transition-all">
+<span class="material-symbols-outlined text-text-secondary mb-2" data-icon="restaurant">restaurant</span>
+<div class="text-label-md font-label-md text-text-secondary">Food</div>
+<div class="font-headline-md text-headline-md">$645</div>
+</div>
+<div class="p-4 bg-surface rounded-xl border border-border-subtle group hover:border-outline transition-all">
+<span class="material-symbols-outlined text-text-secondary mb-2" data-icon="local_activity">local_activity</span>
+<div class="text-label-md font-label-md text-text-secondary">Misc</div>
+<div class="font-headline-md text-headline-md">$300</div>
+</div>
+</div>
+</section>
+<!-- Budget Table -->
+<section class="bg-canvas">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Expenses</h2>
+<p class="text-text-secondary text-body-md font-body-md mt-1">Detailed breakdown of trip costs.</p>
+</div>
+<button class="flex items-center gap-xs px-4 py-2 bg-primary text-on-primary rounded font-body-md text-body-md hover:opacity-90 transition-all shadow-sm" id="add-item-btn">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                        Add Item
+                    </button>
+</div>
+<div class="overflow-hidden">
+<table class="w-full border-collapse">
+<thead>
+<tr class="text-left hairline-border">
+<th class="pb-3 pr-4 font-label-md text-label-md text-text-secondary uppercase tracking-wider w-1/2">Description</th>
+<th class="pb-3 px-4 font-label-md text-label-md text-text-secondary uppercase tracking-wider">Category</th>
+<th class="pb-3 pl-4 font-label-md text-label-md text-text-secondary uppercase tracking-wider text-right">Amount</th>
+</tr>
+</thead>
+<tbody id="budget-body">
+<!-- Rows -->
+<tr class="hairline-border group hover:bg-hover-fill transition-colors">
+<td class="py-4 pr-4">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+<span class="font-body-md text-body-md">Roundtrip Flights - NYC to Tokyo</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="px-2 py-0.5 bg-surface-container rounded text-label-md font-label-md text-secondary">Transport</span>
+</td>
+<td class="py-4 pl-4 text-right font-code text-code">$1,240.00</td>
+</tr>
+<tr class="hairline-border group hover:bg-hover-fill transition-colors">
+<td class="py-4 pr-4">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+<span class="font-body-md text-body-md">Park Hyatt Shinjuku (6 Nights)</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="px-2 py-0.5 bg-surface-container rounded text-label-md font-label-md text-secondary">Stay</span>
+</td>
+<td class="py-4 pl-4 text-right font-code text-code">$2,100.00</td>
+</tr>
+<tr class="hairline-border group hover:bg-hover-fill transition-colors">
+<td class="py-4 pr-4">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+<span class="font-body-md text-body-md">Omakase Dinner - Sukiyabashi Jiro</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="px-2 py-0.5 bg-surface-container rounded text-label-md font-label-md text-secondary">Food</span>
+</td>
+<td class="py-4 pl-4 text-right font-code text-code">$450.00</td>
+</tr>
+<tr class="hairline-border group hover:bg-hover-fill transition-colors">
+<td class="py-4 pr-4">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+<span class="font-body-md text-body-md">Japan Rail Pass (7 Days)</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="px-2 py-0.5 bg-surface-container rounded text-label-md font-label-md text-secondary">Transport</span>
+</td>
+<td class="py-4 pl-4 text-right font-code text-code">$195.00</td>
+</tr>
+<tr class="hairline-border group hover:bg-hover-fill transition-colors">
+<td class="py-4 pr-4">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+<span class="font-body-md text-body-md">TeamLab Borderless Tickets</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="px-2 py-0.5 bg-surface-container rounded text-label-md font-label-md text-secondary">Misc</span>
+</td>
+<td class="py-4 pl-4 text-right font-code text-code">$300.00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td class="py-6 text-right font-headline-md text-headline-md text-text-secondary" colspan="2">Estimated Total</td>
+<td class="py-6 text-right font-headline-md text-headline-md text-primary">$4,285.00</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Action for Mobile (Hidden on Desktop) -->
+<button class="md:hidden fixed bottom-gap-lg right-gap-lg w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center z-50">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<!-- Modal for adding item (Micro-interaction) -->
+<div class="fixed inset-0 bg-black/10 backdrop-blur-sm z-[100] hidden items-center justify-center transition-opacity duration-300 opacity-0" id="add-modal">
+<div class="bg-white w-full max-w-md p-gap-lg rounded-xl shadow-2xl border border-border-subtle transform scale-95 transition-transform duration-300">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md">New Expense</h3>
+<button class="text-text-secondary hover:text-primary" id="close-modal">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<form class="space-y-gap-md" id="expense-form">
+<div>
+<label class="block text-label-md font-label-md text-text-secondary mb-1">Description</label>
+<input class="w-full px-3 py-2 border border-border-subtle focus:border-primary outline-none rounded font-body-md text-body-md" placeholder="e.g. Flight to Tokyo" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="block text-label-md font-label-md text-text-secondary mb-1">Category</label>
+<select class="w-full px-3 py-2 border border-border-subtle focus:border-primary outline-none rounded font-body-md text-body-md bg-white">
+<option>Transport</option>
+<option>Stay</option>
+<option>Food</option>
+<option>Misc</option>
+</select>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-text-secondary mb-1">Amount ($)</label>
+<input class="w-full px-3 py-2 border border-border-subtle focus:border-primary outline-none rounded font-body-md text-body-md" placeholder="0.00" type="number"/>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded font-semibold hover:opacity-90 transition-all mt-4" type="submit">Add Expense Item</button>
+</form>
+</div>
+</div>
+<script>
+        const addBtn = document.getElementById('add-item-btn');
+        const modal = document.getElementById('add-modal');
+        const closeModal = document.getElementById('close-modal');
+        const expenseForm = document.getElementById('expense-form');
+
+        const showModal = () => {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+                modal.querySelector('div').classList.add('scale-100');
+            }, 10);
+        };
+
+        const hideModal = () => {
+            modal.classList.remove('opacity-100');
+            modal.querySelector('div').classList.remove('scale-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        };
+
+        addBtn.addEventListener('click', showModal);
+        closeModal.addEventListener('click', hideModal);
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) hideModal();
+        });
+
+        expenseForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real app, logic to append row would go here
+            hideModal();
+        });
+
+        // Hover effects for rows
+        const rows = document.querySelectorAll('#budget-body tr');
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(4px)';
+                row.style.transition = 'transform 0.2s ease-out';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body></html>
