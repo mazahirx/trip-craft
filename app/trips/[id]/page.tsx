@@ -1,4 +1,4 @@
-import { SidebarLayout } from "@/components/layout/sidebar-layout";
+import { AppShell } from "@/components/layout/app-shell";
 import { TripView } from "@/components/trip/trip-view";
 
 interface TripPageProps {
@@ -9,8 +9,8 @@ export default async function TripPage({ params }: TripPageProps) {
   const { id } = await params;
 
   return (
-    <SidebarLayout title="Trip">
+    <AppShell>
       <TripView tripId={id} />
-    </SidebarLayout>
+    </AppShell>
   );
 }
