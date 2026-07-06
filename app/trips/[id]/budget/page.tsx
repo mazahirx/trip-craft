@@ -61,20 +61,20 @@ export default function BudgetPage() {
 
   return (
     <SidebarLayout title="Trip Budget">
-      <div className="space-y-12">
+      <div className="space-y-8 md:space-y-12">
         <section>
-          <div className="flex flex-col gap-spacing-gap-xs">
+          <div className="flex flex-col gap-gap-xs">
             <span className="text-label-md text-text-secondary tracking-widest uppercase">Total Estimated Expenditure</span>
-            <div className="flex items-baseline gap-spacing-gap-sm">
-              <span className="text-display text-primary">${total.toFixed(2)}</span>
-              <span className="text-status-success text-label-md flex items-center gap-spacing-gap-xs">
+            <div className="flex items-baseline gap-gap-sm">
+              <span className="text-headline-lg md:text-display text-primary">${total.toFixed(2)}</span>
+              <span className="text-status-success text-label-md flex items-center gap-gap-xs">
                 <span className="material-symbols-outlined text-[14px]">trending_down</span>
                 On track
               </span>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-spacing-gap-md mt-spacing-gap-lg">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-gap-md mt-gap-lg">
             {Object.entries(CATEGORY_ICONS).map(([name, icon]) => (
               <div key={name} className="p-4 bg-surface rounded-xl border border-border-subtle hover:border-outline transition-all group">
                 <span className="material-symbols-outlined text-text-secondary mb-2">{icon}</span>
@@ -86,7 +86,7 @@ export default function BudgetPage() {
         </section>
 
         <section className="bg-bg-canvas">
-          <div className="flex justify-between items-end mb-spacing-gap-md">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-gap-md">
             <div>
               <h2 className="text-headline-md text-primary">Expenses</h2>
               <p className="text-text-secondary text-body-md mt-1">Detailed breakdown of trip costs.</p>
@@ -94,67 +94,72 @@ export default function BudgetPage() {
             <button
               type="button"
               onClick={() => setShowModal(true)}
-              className="flex items-center gap-spacing-gap-xs px-4 py-2 bg-primary text-on-primary rounded text-body-md hover:opacity-90 transition-all"
+              className="flex items-center justify-center gap-gap-xs px-4 py-2 bg-primary text-on-primary rounded text-body-md hover:opacity-90 transition-all"
             >
               <span className="material-symbols-outlined text-[18px]">add</span>
               Add Item
             </button>
           </div>
 
-          <div className="overflow-hidden">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="hairline-border text-left">
-                  <th className="pb-3 pr-4 text-label-md text-text-secondary uppercase tracking-wider w-1/2">Description</th>
-                  <th className="pb-3 px-4 text-label-md text-text-secondary uppercase tracking-wider">Category</th>
-                  <th className="pb-3 pl-4 text-label-md text-text-secondary uppercase tracking-wider text-right">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.map((item) => (
-                  <tr key={item.id} className="hairline-border group hover:bg-hover-fill transition-colors">
-                    <td className="py-4 pr-4">
-                      <div className="flex items-center gap-spacing-gap-sm">
-                        <div className="w-2 h-2 rounded-full bg-primary-container" />
-                        <span className="text-body-md">{item.description}</span>
-                      </div>
-                    </td>
-                    <td className="py-4 px-4">
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container rounded text-label-md text-secondary">
-                        <span className="material-symbols-outlined text-[12px]">{CATEGORY_ICONS[item.category]}</span>
-                        {item.category}
-                      </span>
-                    </td>
-                    <td className="py-4 pl-4 text-right text-code">${item.amount.toFixed(2)}</td>
+          <div className="overflow-x-auto -mx-margin-mobile md:mx-0">
+            <div className="inline-block min-w-full align-middle px-margin-mobile md:px-0">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="hairline-border text-left">
+                    <th className="pb-3 pr-4 text-label-md text-text-secondary uppercase tracking-wider w-1/2">Description</th>
+                    <th className="pb-3 px-4 text-label-md text-text-secondary uppercase tracking-wider hidden sm:table-cell">Category</th>
+                    <th className="pb-3 pl-4 text-label-md text-text-secondary uppercase tracking-wider text-right">Amount</th>
                   </tr>
-                ))}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td className="py-6 text-right text-headline-md text-text-secondary" colSpan={2}>Estimated Total</td>
-                  <td className="py-6 text-right text-headline-md text-primary">${total.toFixed(2)}</td>
-                </tr>
-              </tfoot>
-            </table>
+                </thead>
+                <tbody>
+                  {items.map((item) => (
+                    <tr key={item.id} className="hairline-border group hover:bg-hover-fill transition-colors">
+                      <td className="py-4 pr-4">
+                        <div className="flex items-center gap-gap-sm">
+                          <div className="w-2 h-2 rounded-full bg-primary-container shrink-0" />
+                          <div className="min-w-0">
+                            <span className="text-body-md block truncate">{item.description}</span>
+                            <span className="text-label-md text-text-secondary sm:hidden">{item.category}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4 hidden sm:table-cell">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container rounded text-label-md text-secondary">
+                          <span className="material-symbols-outlined text-[12px]">{CATEGORY_ICONS[item.category]}</span>
+                          {item.category}
+                        </span>
+                      </td>
+                      <td className="py-4 pl-4 text-right text-code whitespace-nowrap">${item.amount.toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td className="py-6 text-right text-headline-md text-text-secondary" colSpan={2}>Estimated Total</td>
+                    <td className="py-6 text-right text-headline-md text-primary">${total.toFixed(2)}</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           </div>
         </section>
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 bg-black/10 backdrop-blur-sm z-[100] flex items-center justify-center">
-          <div className="bg-bg-canvas w-full max-w-md p-spacing-gap-lg rounded-xl shadow-2xl border border-border-subtle">
+        <div className="fixed inset-0 bg-black/10 backdrop-blur-sm z-[100] flex items-center justify-center p-margin-mobile">
+          <div className="bg-bg-canvas w-full max-w-md p-gap-lg rounded-xl shadow-2xl border border-border-subtle">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-headline-md">New Expense</h3>
               <button type="button" onClick={() => setShowModal(false)} className="text-text-secondary hover:text-primary">
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
-            <form onSubmit={handleAdd} className="space-y-spacing-gap-md">
+            <form onSubmit={handleAdd} className="space-y-gap-md">
               <div>
                 <label className="block text-label-md text-text-secondary mb-1">Description</label>
                 <input type="text" value={newDesc} onChange={(e) => setNewDesc(e.target.value)} className="w-full px-3 py-2 border border-border-subtle focus:border-primary outline-none rounded text-body-md" placeholder="e.g. Flight to Tokyo" />
               </div>
-              <div className="grid grid-cols-2 gap-spacing-gap-md">
+              <div className="grid grid-cols-2 gap-gap-md">
                 <div>
                   <label className="block text-label-md text-text-secondary mb-1">Category</label>
                   <select value={newCat} onChange={(e) => setNewCat(e.target.value)} className="w-full px-3 py-2 border border-border-subtle focus:border-primary outline-none rounded text-body-md bg-bg-canvas">

@@ -49,16 +49,16 @@ export function TripView({ tripId }: { tripId: string }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
       </div>
 
-      <div className="flex items-end justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
-          <h2 className="text-display tracking-tight text-primary">{trip.title}</h2>
-          <p className="text-text-secondary text-body-lg mt-2">
+          <h2 className="text-headline-lg md:text-display tracking-tight text-primary">{trip.title}</h2>
+          <p className="text-text-secondary text-body-md md:text-body-lg mt-2">
             {trip.startDate
               ? `${new Date(trip.startDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })} — ${trip.endDate ? new Date(trip.endDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "TBD"}`
               : "No dates set"}
           </p>
         </div>
-        <div className="flex gap-spacing-gap-sm">
+        <div className="flex gap-gap-sm flex-wrap">
           <span className="px-2 py-1 bg-surface-container text-text-secondary text-label-md rounded border border-border-subtle flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">calendar_today</span>
             {totalDays > 0 ? `${totalDays} days` : "Draft"}

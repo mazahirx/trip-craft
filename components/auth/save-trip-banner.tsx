@@ -13,7 +13,7 @@ export function SaveTripBanner({ checkpointCount }: SaveTripBannerProps) {
   if (!isAnonymous || checkpointCount < 2) return null;
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-border-muted bg-surface px-spacing-gap-md py-spacing-gap-sm sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col gap-3 rounded-lg border border-border-muted bg-surface px-gap-md py-gap-sm sm:flex-row sm:items-center sm:justify-between">
       <div>
         <p className="text-body-md font-semibold text-primary">Save this trip forever</p>
         <p className="text-body-md text-text-secondary">Sign up in seconds — your checkpoints and budget stay linked to your account.</p>

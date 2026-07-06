@@ -9,7 +9,7 @@ export default function NewTripPage() {
         <p className="text-body-md text-text-secondary mt-2">
           You&apos;ll start in anonymous mode — sign up anytime to save forever.
         </p>
-        <div className="mt-spacing-gap-lg border border-border-subtle rounded-lg p-spacing-gap-md bg-surface">
+        <div className="mt-gap-lg border border-border-subtle rounded-lg p-gap-md bg-surface">
           <TripCreator />
         </div>
       </div>

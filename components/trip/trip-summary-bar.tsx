@@ -11,7 +11,7 @@ export function TripSummaryBar({ currency = "USD" }: TripSummaryBarProps) {
   const formatter = new Intl.NumberFormat(undefined, { style: "currency", currency });
 
   return (
-    <div className="flex flex-wrap items-center gap-6 border border-border-subtle rounded-lg bg-surface px-spacing-gap-md py-spacing-gap-sm">
+    <div className="flex flex-wrap items-center gap-4 md:gap-6 border border-border-subtle rounded-lg bg-surface px-gap-md py-gap-sm">
       <SummaryItem label="Duration" value={`${totalDays} days`} />
       <SummaryItem label="Total budget" value={formatter.format(totalBudget)} />
       <SummaryItem label="Per person" value={formatter.format(perPerson)} />

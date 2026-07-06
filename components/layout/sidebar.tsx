@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/components/providers/auth-provider";
+import { useState } from "react";
 
 const navItems = [
   { href: "/trips", icon: "map", label: "My Trips" },
@@ -14,14 +15,14 @@ const bottomItems = [
   { href: "/help", icon: "help", label: "Help" },
 ];
 
-export function Sidebar() {
+function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   const { isAnonymous, user } = useAuth();
 
   return (
-    <aside className="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface border-r border-border-subtle z-50 py-spacing-gap-lg px-spacing-gap-md">
-      <div className="mb-spacing-gap-lg px-2">
-        <Link href="/">
+    <>
+      <div className="mb-gap-lg px-2">
+        <Link href="/" onClick={onNavigate}>
           <h1 className="text-headline-md font-bold text-primary tracking-tight">TripCraft</h1>
           <p className="text-label-md text-text-secondary mt-1">Minimal Travel Planning</p>
         </Link>
@@ -34,7 +35,8 @@ export function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-spacing-gap-sm px-3 py-2 rounded transition-colors ${
+              onClick={onNavigate}
+              className={`flex items-center gap-gap-sm px-3 py-2 rounded transition-colors ${
                 isActive
                   ? "bg-hover-fill text-primary font-semibold"
                   : "text-text-secondary hover:bg-hover-fill hover:text-primary"
@@ -47,12 +49,13 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="pt-spacing-gap-lg border-t border-border-subtle space-y-1">
+      <div className="pt-gap-lg border-t border-border-subtle space-y-1">
         {bottomItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="flex items-center gap-spacing-gap-sm px-3 py-2 rounded transition-colors text-text-secondary hover:bg-hover-fill hover:text-primary"
+            onClick={onNavigate}
+            className="flex items-center gap-gap-sm px-3 py-2 rounded transition-colors text-text-secondary hover:bg-hover-fill hover:text-primary"
           >
             <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
             <span className="text-body-md">{item.label}</span>
@@ -65,13 +68,40 @@ export function Sidebar() {
               await signOut();
               window.location.href = "/";
             }}
-            className="flex items-center gap-spacing-gap-sm px-3 py-2 rounded transition-colors text-text-secondary hover:bg-hover-fill hover:text-primary w-full text-left"
+            className="flex items-center gap-gap-sm px-3 py-2 rounded transition-colors text-text-secondary hover:bg-hover-fill hover:text-primary w-full text-left"
           >
             <span className="material-symbols-outlined text-[20px]">logout</span>
             <span className="text-body-md">Logout</span>
           </button>
         )}
       </div>
-    </aside>
+    </>
+  );
+}
+
+export function Sidebar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  return (
+    <>
+      <aside className="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface border-r border-border-subtle z-50 py-gap-lg px-gap-md">
+        <SidebarContent />
+      </aside>
+      {mobileOpen && (
+        <div className="fixed inset-0 z-50 md:hidden">
+          <div className="absolute inset-0 bg-black/30" onClick={() => setMobileOpen(false)} />
+          <aside className="relative w-72 h-full bg-surface border-r border-border-subtle py-gap-lg px-gap-md overflow-y-auto">
+            <SidebarContent onNavigate={() => setMobileOpen(false)} />
+          </aside>
+        </div>
+      )}
+      <button
+        className="fixed bottom-4 left-4 z-40 md:hidden bg-primary text-on-primary p-3 rounded-full shadow-lg hover:opacity-90 transition-opacity"
+        onClick={() => setMobileOpen(!mobileOpen)}
+        aria-label="Toggle navigation"
+      >
+        <span className="material-symbols-outlined">{mobileOpen ? "close" : "menu"}</span>
+      </button>
+    </>
   );
 }

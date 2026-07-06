@@ -19,8 +19,8 @@ export function SidebarLayout({
     <div className="min-h-screen bg-bg-canvas">
       <Sidebar />
       <TopBarWrapper title={title} breadcrumb={breadcrumb} actions={actions} />
-      <main className="pt-16 pb-24 px-spacing-margin-mobile md:ml-64 md:px-spacing-margin-page">
-        <div className="mx-auto mt-12" style={{ maxWidth: "900px" }}>
+      <main className="pt-16 pb-24 px-margin-mobile md:ml-64 md:px-margin-page">
+        <div className="mx-auto mt-8 md:mt-12" style={{ maxWidth: "900px" }}>
           {children}
         </div>
       </main>
