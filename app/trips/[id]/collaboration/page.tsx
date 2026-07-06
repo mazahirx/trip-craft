@@ -22,14 +22,14 @@ export default function CollaborationPage() {
             {/* Editor Link */}
             <div className="p-spacing-gap-md border border-border-subtle hover:border-text-main transition-colors group relative overflow-hidden">
               <div className="flex items-center justify-between mb-spacing-gap-sm">
-                <div className="flex items-center gap-xs">
+                <div className="flex items-center gap-spacing-gap-xs">
                   <span className="material-symbols-outlined text-text-secondary">edit</span>
                   <span className="text-label-md uppercase tracking-wider">Editor Link</span>
                 </div>
                 <span className="h-2 w-2 rounded-full bg-status-success" />
               </div>
               <p className="text-body-md text-text-secondary mb-spacing-gap-md">Full permission to add, move, or delete itinerary blocks.</p>
-              <div className="flex items-center gap-xs">
+              <div className="flex items-center gap-spacing-gap-xs">
                 <code className="bg-surface px-3 py-2 flex-1 text-code text-text-secondary truncate">tripcraft.io/s/ed-92kxl-0</code>
                 <button type="button" className="p-2 border border-border-subtle hover:bg-hover-fill transition-colors" title="Copy link">
                   <span className="material-symbols-outlined text-sm">content_copy</span>
@@ -39,13 +39,13 @@ export default function CollaborationPage() {
             {/* Viewer Link */}
             <div className="p-spacing-gap-md border border-border-subtle hover:border-text-main transition-colors group relative overflow-hidden">
               <div className="flex items-center justify-between mb-spacing-gap-sm">
-                <div className="flex items-center gap-xs">
+                <div className="flex items-center gap-spacing-gap-xs">
                   <span className="material-symbols-outlined text-text-secondary">visibility</span>
                   <span className="text-label-md uppercase tracking-wider">Viewer Link</span>
                 </div>
               </div>
               <p className="text-body-md text-text-secondary mb-spacing-gap-md">Read-only access for family or friends to follow the journey.</p>
-              <div className="flex items-center gap-xs">
+              <div className="flex items-center gap-spacing-gap-xs">
                 <code className="bg-surface px-3 py-2 flex-1 text-code text-text-secondary truncate">tripcraft.io/s/vw-41pqr-8</code>
                 <button type="button" className="p-2 border border-border-subtle hover:bg-hover-fill transition-colors" title="Copy link">
                   <span className="material-symbols-outlined text-sm">content_copy</span>
@@ -59,7 +59,7 @@ export default function CollaborationPage() {
         <section>
           <div className="flex items-center justify-between mb-spacing-gap-md">
             <h3 className="text-headline-md text-primary">Travel Companions</h3>
-            <button type="button" className="text-label-md text-primary hover:underline flex items-center gap-xs">
+            <button type="button" className="text-label-md text-primary hover:underline flex items-center gap-spacing-gap-xs">
               <span className="material-symbols-outlined text-sm">person_add</span>
               Invite Member
             </button>

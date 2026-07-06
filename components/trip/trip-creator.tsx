@@ -38,9 +38,9 @@ export function TripCreator() {
   }, [title, startDate, endDate, router, setTrip]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-spacing-gap-md">
       <div>
-        <label htmlFor="title" className="block text-sm font-medium text-zinc-700">
+        <label htmlFor="title" className="block text-label-md text-text-secondary mb-1">
           Trip title
         </label>
         <input
@@ -49,13 +49,13 @@ export function TripCreator() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="e.g. Summer in Japan"
-          className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+          className="w-full px-3 py-2 border border-border-subtle rounded text-body-md text-primary bg-bg-canvas focus:border-primary focus:outline-none transition-soft"
         />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="startDate" className="block text-sm font-medium text-zinc-700">
+          <label htmlFor="startDate" className="block text-label-md text-text-secondary mb-1">
             Start date
           </label>
           <input
@@ -63,11 +63,11 @@ export function TripCreator() {
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+            className="w-full px-3 py-2 border border-border-subtle rounded text-body-md text-primary bg-bg-canvas focus:border-primary focus:outline-none transition-soft"
           />
         </div>
         <div>
-          <label htmlFor="endDate" className="block text-sm font-medium text-zinc-700">
+          <label htmlFor="endDate" className="block text-label-md text-text-secondary mb-1">
             End date
           </label>
           <input
@@ -75,7 +75,7 @@ export function TripCreator() {
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+            className="w-full px-3 py-2 border border-border-subtle rounded text-body-md text-primary bg-bg-canvas focus:border-primary focus:outline-none transition-soft"
           />
         </div>
       </div>
@@ -83,14 +83,14 @@ export function TripCreator() {
       <LocationSearch />
 
       {error && (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>
+        <p className="text-body-md text-error bg-error-container/20 px-3 py-2 rounded">{error}</p>
       )}
 
       <button
         type="button"
         onClick={handleCreate}
         disabled={loading}
-        className="w-full rounded-lg bg-teal-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-teal-700 disabled:opacity-50"
+        className="w-full bg-primary text-on-primary py-3 rounded text-body-md font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
       >
         {loading ? "Creating…" : "Start planning"}
       </button>

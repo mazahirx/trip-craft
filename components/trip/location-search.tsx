@@ -61,7 +61,7 @@ export function LocationSearch({
 
   return (
     <div ref={ref} className="relative">
-      <label className="block text-sm font-medium text-zinc-700">
+      <label className="block text-label-md text-text-secondary mb-1">
         Destination
       </label>
       <input
@@ -70,20 +70,20 @@ export function LocationSearch({
         onChange={(e) => handleInput(e.target.value)}
         onFocus={() => results.length > 0 && setIsOpen(true)}
         placeholder={placeholder}
-        className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+        className="w-full px-3 py-2 border border-border-subtle rounded text-body-md text-primary bg-bg-canvas focus:border-primary focus:outline-none transition-soft"
       />
       {loading && (
-        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-400">
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-label-md text-text-secondary">
           Searching…
         </span>
       )}
       {isOpen && results.length > 0 && (
-        <ul className="absolute z-10 mt-1 max-h-48 w-full overflow-y-auto rounded-lg border border-zinc-200 bg-white shadow-lg">
+        <ul className="absolute z-10 mt-1 max-h-48 w-full overflow-y-auto rounded-lg border border-border-subtle bg-bg-canvas shadow-lg">
           {results.map((r, i) => (
             <li
               key={i}
               onClick={() => handleSelect(r)}
-              className="cursor-pointer px-3 py-2 text-sm text-zinc-700 hover:bg-teal-50"
+              className="cursor-pointer px-3 py-2 text-body-md text-text-secondary hover:bg-hover-fill transition-colors"
             >
               {r.displayName}
             </li>

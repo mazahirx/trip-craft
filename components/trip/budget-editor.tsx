@@ -12,6 +12,7 @@ export function BudgetEditor({ tripId }: { tripId: string }) {
   const [showForm, setShowForm] = useState(false);
   const [category, setCategory] = useState<string>("other");
   const [amount, setAmount] = useState("");
+
   function handleAdd() {
     const parsed = parseFloat(amount);
     if (isNaN(parsed) || parsed <= 0) return;
@@ -33,28 +34,26 @@ export function BudgetEditor({ tripId }: { tripId: string }) {
   const total = budgetItems.reduce((sum, item) => sum + Number(item.amount), 0);
 
   return (
-    <section className="rounded-xl border border-zinc-200 bg-white p-6">
+    <section className="border border-border-subtle rounded-lg bg-surface p-spacing-gap-md">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-zinc-900">
-          Budget — ${total.toFixed(2)}
-        </h2>
+        <h2 className="text-headline-md text-primary">Budget — ${total.toFixed(2)}</h2>
         <button
           type="button"
           onClick={() => setShowForm(true)}
-          className="rounded-lg bg-teal-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-teal-700"
+          className="bg-primary text-on-primary px-3 py-1.5 rounded text-label-md font-medium hover:opacity-90 transition-opacity"
         >
           Add item
         </button>
       </div>
 
       {showForm && (
-        <div className="mt-4 space-y-3 rounded-lg border border-zinc-100 p-4">
+        <div className="mt-4 space-y-3 border border-border-subtle rounded p-4">
           <div>
-            <label className="block text-xs font-medium text-zinc-600">Category</label>
+            <label className="block text-label-md text-text-secondary mb-1">Category</label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full px-3 py-2 border border-border-subtle rounded text-body-md text-primary bg-bg-canvas focus:border-primary focus:outline-none transition-soft"
             >
               {CATEGORIES.map((c) => (
                 <option key={c} value={c}>
@@ -64,7 +63,7 @@ export function BudgetEditor({ tripId }: { tripId: string }) {
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-zinc-600">Amount ($)</label>
+            <label className="block text-label-md text-text-secondary mb-1">Amount ($)</label>
             <input
               type="number"
               step="0.01"
@@ -72,21 +71,21 @@ export function BudgetEditor({ tripId }: { tripId: string }) {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               placeholder="0.00"
-              className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full px-3 py-2 border border-border-subtle rounded text-body-md text-primary bg-bg-canvas focus:border-primary focus:outline-none transition-soft"
             />
           </div>
           <div className="flex gap-2">
             <button
               type="button"
               onClick={handleAdd}
-              className="rounded-lg bg-teal-600 px-4 py-2 text-xs font-medium text-white hover:bg-teal-700"
+              className="bg-primary text-on-primary px-4 py-2 rounded text-body-md font-medium hover:opacity-90 transition-opacity"
             >
               Add
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
-              className="rounded-lg border border-zinc-300 px-4 py-2 text-xs font-medium text-zinc-600 hover:bg-zinc-50"
+              className="border border-border-subtle px-4 py-2 rounded text-body-md text-text-secondary hover:bg-hover-fill transition-colors"
             >
               Cancel
             </button>
@@ -95,21 +94,17 @@ export function BudgetEditor({ tripId }: { tripId: string }) {
       )}
 
       {budgetItems.length === 0 && !showForm && (
-        <p className="mt-4 text-sm text-zinc-500">
-          No budget items yet. Add your first expense.
-        </p>
+        <p className="mt-4 text-body-md text-text-secondary">No budget items yet. Add your first expense.</p>
       )}
 
       <ul className="mt-4 space-y-1">
         {budgetItems.map((item) => (
           <li
             key={item.id}
-            className="flex items-center justify-between rounded-lg px-3 py-2 text-sm"
+            className="flex items-center justify-between px-3 py-2 text-body-md"
           >
-            <span className="text-zinc-600 capitalize">{item.category}</span>
-            <span className="font-medium text-zinc-900">
-              ${Number(item.amount).toFixed(2)}
-            </span>
+            <span className="text-text-secondary capitalize">{item.category}</span>
+            <span className="font-medium text-primary">${Number(item.amount).toFixed(2)}</span>
           </li>
         ))}
       </ul>

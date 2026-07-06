@@ -81,7 +81,7 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
   };
 
   return (
-    <div className="auth-card flex flex-col items-center w-full max-w-sm mx-auto">
+    <div className="flex flex-col items-center w-full max-w-sm mx-auto">
       <div className="mb-spacing-gap-lg text-center">
         <h1 className="text-display text-primary tracking-tight mb-spacing-base">TripCraft</h1>
         <p className="text-body-lg text-text-secondary">
@@ -100,7 +100,7 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
         <button
           type="button"
           onClick={handleGoogle}
-          className="w-full flex items-center justify-center gap-sm px-spacing-gap-md py-spacing-gap-sm border border-border-muted rounded bg-bg-canvas text-body-md text-primary transition-soft hover:bg-hover-fill active:opacity-80"
+          className="w-full flex items-center justify-center gap-spacing-gap-sm px-spacing-gap-md py-spacing-gap-sm border border-border-muted rounded bg-bg-canvas text-body-md text-primary transition-soft hover:bg-hover-fill active:opacity-80"
         >
           <svg height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.64 9.20455C17.64 8.56636 17.5827 7.95273 17.4764 7.36364H9V10.845H13.8436C13.635 11.97 13.0009 12.9232 12.0477 13.5614V15.8195H14.9564C16.6582 14.2527 17.64 11.9455 17.64 9.20455Z" fill="#4285F4" />
@@ -177,7 +177,7 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
         <button
           type="button"
           onClick={() => setMode(mode === "login" ? "signup" : "login")}
-          className="inline-flex items-center gap-xs text-body-md text-primary hover:underline decoration-1 underline-offset-4 transition-soft group"
+          className="inline-flex items-center gap-spacing-gap-xs text-body-md text-primary hover:underline decoration-1 underline-offset-4 transition-soft group"
         >
           {mode === "login" ? "Start planning anonymously" : "Sign in"}
           <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">

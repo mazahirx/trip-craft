@@ -25,15 +25,13 @@ export function CompanionManager() {
   }
 
   return (
-    <div className="rounded-xl border border-zinc-200 bg-white p-6">
+    <div className="border border-border-subtle rounded-lg bg-surface p-spacing-gap-md">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-zinc-900">
-          Companions ({companions.length})
-        </h2>
+        <h2 className="text-headline-md text-primary">Companions ({companions.length})</h2>
         <button
           type="button"
           onClick={() => setShowForm(true)}
-          className="rounded-lg bg-teal-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-teal-700"
+          className="bg-primary text-on-primary px-3 py-1.5 rounded text-label-md font-medium hover:opacity-90 transition-opacity"
         >
           Add companion
         </button>
@@ -46,12 +44,12 @@ export function CompanionManager() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Name"
-            className="flex-1 rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+            className="flex-1 px-3 py-2 border border-border-subtle rounded text-body-md text-primary bg-bg-canvas focus:border-primary focus:outline-none transition-soft"
           />
           <button
             type="button"
             onClick={handleAdd}
-            className="rounded-lg bg-teal-600 px-4 py-2 text-xs font-medium text-white hover:bg-teal-700"
+            className="bg-primary text-on-primary px-4 py-2 rounded text-body-md font-medium hover:opacity-90 transition-opacity"
           >
             Add
           </button>
@@ -59,18 +57,16 @@ export function CompanionManager() {
       )}
 
       {companions.length === 0 && !showForm && (
-        <p className="mt-4 text-sm text-zinc-500">
-          No companions yet. Who are you traveling with?
-        </p>
+        <p className="mt-4 text-body-md text-text-secondary">No companions yet. Who are you traveling with?</p>
       )}
 
       <ul className="mt-4 space-y-1">
         {companions.map((c) => (
-          <li key={c.id} className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm">
-            <span className="flex size-6 items-center justify-center rounded-full bg-teal-100 text-xs font-medium text-teal-700">
+          <li key={c.id} className="flex items-center gap-2 px-3 py-2 text-body-md">
+            <span className="flex size-6 items-center justify-center rounded-full bg-primary-container text-label-md text-on-primary-container">
               {c.name.charAt(0).toUpperCase()}
             </span>
-            <span className="text-zinc-900">{c.name}</span>
+            <span className="text-primary">{c.name}</span>
           </li>
         ))}
       </ul>
