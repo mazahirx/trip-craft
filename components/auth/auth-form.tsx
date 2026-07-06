@@ -8,11 +8,11 @@ import { z } from "zod";
 import {
   signInWithEmail,
   signInWithGoogle,
+  signUpWithEmail,
 } from "@/lib/auth/client";
-import { createClient } from "@/lib/db/supabase-client";
-import { useAuth } from "@/components/providers/auth-provider";
 
 const authSchema = z.object({
+  name: z.string().min(1, "Name is required").max(100),
   email: z.string().email("Enter a valid email"),
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
@@ -29,8 +29,7 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") ?? "/";
-  const { isAnonymous, refreshUser } = useAuth();
+  const redirect = searchParams.get("redirect") ?? "/trips";
 
   const {
     register,
@@ -48,23 +47,19 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
         const { error: signInError } = await signInWithEmail(data.email, data.password);
         if (signInError) throw signInError;
       } else {
-        const supabase = createClient();
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user?.is_anonymous) {
-          const { error: linkError } = await supabase.auth.updateUser({
-            email: data.email,
-            password: data.password,
-          });
-          if (linkError) throw linkError;
-        } else {
-          const { error: signUpError } = await supabase.auth.signUp({
-            email: data.email,
-            password: data.password,
-          });
-          if (signUpError) throw signUpError;
+        const { data: signUpData, error: signUpError } = await signUpWithEmail(data.email, data.password);
+        if (signUpError) throw signUpError;
+
+        if (signUpData.user) {
+          // Update profile with name
+          const { createClient } = await import("@/lib/db/supabase-client");
+          const supabase = createClient();
+          await supabase.from("profiles").insert({
+            id: signUpData.user.id,
+            display_name: data.name,
+          }).maybeSingle();
         }
       }
-      await refreshUser();
       router.push(redirect);
       router.refresh();
     } catch (err) {
@@ -89,12 +84,6 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
         </p>
       </div>
 
-      {isAnonymous && mode === "signup" && (
-        <div className="w-full mb-gap-md px-gap-md py-gap-sm bg-surface border border-border-subtle rounded-lg text-body-md text-text-secondary text-center">
-          Your current trip will be saved to this account automatically.
-        </div>
-      )}
-
       <div className="w-full space-y-gap-sm mb-gap-lg">
         <button
           type="button"
@@ -118,6 +107,20 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-gap-md">
+        {mode === "signup" && (
+          <div className="space-y-base">
+            <label className="text-label-md text-text-secondary ml-base" htmlFor="name">Full name</label>
+            <input
+              id="name"
+              type="text"
+              autoComplete="name"
+              placeholder="Enter your full name..."
+              className="w-full px-gap-md py-gap-sm border border-border-subtle rounded text-body-md text-primary bg-bg-canvas transition-soft focus:border-primary focus:outline-none"
+              {...register("name")}
+            />
+            {errors.name && <p className="text-xs text-error mt-1">{errors.name.message}</p>}
+          </div>
+        )}
         <div className="space-y-base">
           <label className="text-label-md text-text-secondary ml-base" htmlFor="email">Email</label>
           <input
@@ -165,7 +168,7 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
           onClick={() => setMode(mode === "login" ? "signup" : "login")}
           className="inline-flex items-center gap-gap-xs text-body-md text-primary hover:underline decoration-1 underline-offset-4 transition-soft group"
         >
-          {mode === "login" ? "Start planning anonymously" : "Sign in"}
+          {mode === "login" ? "Create an account" : "Sign in"}
           <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
         </button>
       </footer>
@@ -175,12 +178,10 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
 
 export function SignOutButton() {
   const router = useRouter();
-  const { refreshUser } = useAuth();
 
   const handleSignOut = async () => {
     const { signOut } = await import("@/lib/auth/client");
     await signOut();
-    await refreshUser();
     router.push("/");
     router.refresh();
   };

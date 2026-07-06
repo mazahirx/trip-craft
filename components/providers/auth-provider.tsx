@@ -14,14 +14,12 @@ import type { User } from "@supabase/supabase-js";
 interface AuthContextValue {
   user: User | null;
   loading: boolean;
-  isAnonymous: boolean;
   refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue>({
   user: null,
   loading: true,
-  isAnonymous: true,
   refreshUser: async () => {},
 });
 
@@ -31,8 +29,7 @@ export function useAuth() {
 
 function syncAuthStore(user: User | null) {
   useAuthStore.getState().setAuth({
-    isAuthenticated: !!user && !user.is_anonymous,
-    isAnonymous: !!user?.is_anonymous,
+    isAuthenticated: !!user,
     userId: user?.id ?? null,
     email: user?.email ?? null,
   });
@@ -55,14 +52,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const supabase = createClient();
 
     async function init() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      if (!session) {
-        await supabase.auth.signInAnonymously();
-      }
-
       const {
         data: { user: currentUser },
       } = await supabase.auth.getUser();
@@ -98,7 +87,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         user,
         loading,
-        isAnonymous: !!user?.is_anonymous,
         refreshUser,
       }}
     >

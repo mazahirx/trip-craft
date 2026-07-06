@@ -16,6 +16,7 @@ interface TripState {
   checkpoints: CheckpointWithStays[];
   budgetItems: BudgetItem[];
   notes: Note[];
+  coverImageUrl: string | null;
   isDirty: boolean;
 
   setTrip: (trip: Trip) => void;
@@ -28,6 +29,7 @@ interface TripState {
   removeCheckpoint: (id: string) => void;
   addBudgetItem: (item: BudgetItem) => void;
   addCompanion: (companion: Companion) => void;
+  setCoverImage: (url: string | null) => void;
   markClean: () => void;
   reset: () => void;
 }
@@ -38,6 +40,7 @@ export const useTripStore = create<TripState>((set, get) => ({
   checkpoints: [],
   budgetItems: [],
   notes: [],
+  coverImageUrl: null,
   isDirty: false,
 
   setTrip: (trip) => set({ trip }),
@@ -78,6 +81,7 @@ export const useTripStore = create<TripState>((set, get) => ({
       isDirty: true,
     })),
 
+  setCoverImage: (url) => set({ coverImageUrl: url }),
   markClean: () => set({ isDirty: false }),
   reset: () =>
     set({
@@ -86,6 +90,7 @@ export const useTripStore = create<TripState>((set, get) => ({
       checkpoints: [],
       budgetItems: [],
       notes: [],
+      coverImageUrl: null,
       isDirty: false,
     }),
 }));

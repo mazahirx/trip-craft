@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useAuth } from "@/components/providers/auth-provider";
 
 export function PublicHeader() {
-  const { user, isAnonymous } = useAuth();
+  const { user } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -23,8 +23,20 @@ export function PublicHeader() {
           >
             My Trips
           </Link>
-          {user && !isAnonymous ? (
-            <span className="text-text-secondary text-body-md">{user.email}</span>
+          {user ? (
+            <div className="flex items-center gap-3">
+              <span className="text-text-secondary text-body-md">{user.email}</span>
+              <button
+                onClick={async () => {
+                  const { signOut } = await import("@/lib/auth/client");
+                  await signOut();
+                  window.location.href = "/";
+                }}
+                className="text-label-md text-text-secondary hover:text-primary transition-colors"
+              >
+                Logout
+              </button>
+            </div>
           ) : (
             <>
               <Link
@@ -49,8 +61,21 @@ export function PublicHeader() {
       {mobileOpen && (
         <div className="md:hidden bg-bg-canvas border-b border-border-subtle px-margin-mobile py-gap-md space-y-gap-sm">
           <Link href="/trips" className="block text-body-md text-text-secondary hover:text-primary transition-soft" onClick={() => setMobileOpen(false)}>My Trips</Link>
-          {user && !isAnonymous ? (
-            <span className="block text-body-md text-text-secondary">{user.email}</span>
+          {user ? (
+            <div className="flex flex-col gap-2">
+              <span className="block text-body-md text-text-secondary">{user.email}</span>
+              <button
+                onClick={async () => {
+                  setMobileOpen(false);
+                  const { signOut } = await import("@/lib/auth/client");
+                  await signOut();
+                  window.location.href = "/";
+                }}
+                className="block text-left text-body-md text-text-secondary hover:text-primary transition-soft"
+              >
+                Logout
+              </button>
+            </div>
           ) : (
             <>
               <Link href="/auth/login" className="block text-body-md text-text-secondary hover:text-primary transition-soft" onClick={() => setMobileOpen(false)}>Sign in</Link>

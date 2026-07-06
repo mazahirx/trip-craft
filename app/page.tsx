@@ -1,4 +1,5 @@
 import { AppShell } from "@/components/layout/app-shell";
+import { PlanTripButton } from "@/components/auth/plan-trip-button";
 import Link from "next/link";
 export default function HomePage() {
   return (
@@ -12,12 +13,7 @@ export default function HomePage() {
             Remember, when last time did you actually turned a plan into trip. Let&apos;s create another trip plan but with a system.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 gap-gap-sm mt-gap-md justify-center md:justify-start">
-            <Link
-              href="/trips/new"
-              className="bg-primary text-on-primary px-8 md:px-10 py-3 md:py-4 rounded-lg text-headline-md hover:opacity-90 transition-soft text-center"
-            >
-              Plan a Trip for Free
-            </Link>
+            <PlanTripButton />
             <Link 
               href="#features"
               className="bg-bg-canvas border border-zinc-600 text-primary px-8 md:px-10 py-3 md:py-4 rounded-lg text-headline-md hover:bg-hover-fill transition-soft text-center"

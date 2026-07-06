@@ -9,7 +9,7 @@ interface TopBarProps {
 }
 
 export function TopBar({ title, breadcrumb, actions }: TopBarProps) {
-  const { user, isAnonymous } = useAuth();
+  const { user } = useAuth();
 
   return (
     <header className="fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] z-40 bg-bg-canvas border-b border-border-subtle">
@@ -29,15 +29,14 @@ export function TopBar({ title, breadcrumb, actions }: TopBarProps) {
         </div>
         <div className="flex items-center gap-gap-md shrink-0">
           {actions}
-          {user && !isAnonymous && (
+          {user ? (
             <span className="hidden sm:inline text-label-md text-text-secondary truncate max-w-[120px]">{user.email}</span>
-          )}
-          {isAnonymous && (
+          ) : (
             <a
               href="/auth/login"
               className="bg-primary text-on-primary px-3 md:px-4 py-1.5 rounded text-label-md md:text-body-md font-medium hover:opacity-90 transition-opacity whitespace-nowrap"
             >
-              Save trips
+              Sign in
             </a>
           )}
         </div>
