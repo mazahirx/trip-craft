@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { trips, companions, budgetItems } from "@/lib/db/schema";
-import { getUser } from "@/lib/auth/server";
 import {
   computeTotalBudget,
   computeTotalDays,

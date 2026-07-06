@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HeaderNav } from "./header-nav";
 
 export function Header() {
   return (
@@ -7,14 +8,7 @@ export function Header() {
         <Link href="/" className="text-xl font-bold text-teal-700">
           TripCraft
         </Link>
-        <nav className="flex items-center gap-4 text-sm">
-          <Link href="/trips/new" className="text-zinc-600 hover:text-zinc-900">
-            New trip
-          </Link>
-          <Link href="/auth/login" className="text-zinc-600 hover:text-zinc-900">
-            Sign in
-          </Link>
-        </nav>
+        <HeaderNav />
       </div>
     </header>
   );
