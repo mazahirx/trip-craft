@@ -2,12 +2,10 @@ import { create } from "zustand";
 
 interface AuthState {
   isAuthenticated: boolean;
-  isAnonymous: boolean;
   userId: string | null;
   email: string | null;
   setAuth: (data: {
     isAuthenticated: boolean;
-    isAnonymous: boolean;
     userId: string | null;
     email: string | null;
   }) => void;
@@ -16,7 +14,6 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
-  isAnonymous: true,
   userId: null,
   email: null,
 
@@ -24,7 +21,6 @@ export const useAuthStore = create<AuthState>((set) => ({
   clearAuth: () =>
     set({
       isAuthenticated: false,
-      isAnonymous: true,
       userId: null,
       email: null,
     }),

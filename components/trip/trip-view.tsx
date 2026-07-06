@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import { useTripStore } from "@/stores/trip-store";
 import { fetchTrip } from "@/lib/api/trips";
 import { CheckpointEditor } from "@/components/trip/checkpoint-editor";
@@ -9,8 +10,10 @@ import { SaveTripBanner } from "@/components/auth/save-trip-banner";
 export function TripView({ tripId }: { tripId: string }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const {
-    trip, companions, setTrip, setCompanions, setCheckpoints, setBudgetItems, setNotes, checkpoints, reset,
+    trip, companions, setTrip, setCompanions, setCheckpoints, setBudgetItems, setNotes, checkpoints, reset, coverImageUrl, setCoverImage,
   } = useTripStore();
 
   useEffect(() => {
@@ -32,6 +35,30 @@ export function TripView({ tripId }: { tripId: string }) {
     load();
   }, [tripId, reset, setTrip, setCompanions, setCheckpoints, setBudgetItems, setNotes]);
 
+  async function handleCoverUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !trip) return;
+    setUploading(true);
+    try {
+      const { createClient } = await import("@/lib/db/supabase-client");
+      const supabase = createClient();
+      const ext = file.name.split(".").pop();
+      const filePath = `${trip.id}/cover.${ext}`;
+      const { data, error: uploadError } = await supabase.storage
+        .from("trip-covers")
+        .upload(filePath, file, { upsert: true });
+      if (uploadError) throw uploadError;
+      const { data: { publicUrl } } = supabase.storage
+        .from("trip-covers")
+        .getPublicUrl(data.path);
+      setCoverImage(publicUrl);
+    } catch (err) {
+      console.error("Upload failed:", err);
+    } finally {
+      setUploading(false);
+    }
+  }
+
   if (loading) return <div className="flex items-center justify-center py-20"><span className="text-body-md text-text-secondary">Loading trip…</span></div>;
   if (error) return <div className="rounded-lg border border-error-container/50 bg-error-container/10 p-6 text-center"><p className="text-body-md text-error">{error}</p></div>;
   if (!trip) return null;
@@ -42,12 +69,25 @@ export function TripView({ tripId }: { tripId: string }) {
 
   return (
     <div className="space-y-10">
-      <div className="relative w-full h-64 overflow-hidden rounded-xl bg-surface">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="material-symbols-outlined text-6xl text-border-muted">image</span>
+      <div
+        className="relative w-full h-48 md:h-64 overflow-hidden rounded-xl bg-surface cursor-pointer group"
+        onClick={() => fileInputRef.current?.click()}
+      >
+        {coverImageUrl ? (
+          <Image src={coverImageUrl} alt="Trip cover" fill className="object-cover" />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="material-symbols-outlined text-6xl text-border-muted">image</span>
+          </div>
+        )}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+          <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 text-white px-4 py-2 rounded-lg text-body-md flex items-center gap-2">
+            <span className="material-symbols-outlined text-[18px]">photo_camera</span>
+            {uploading ? "Uploading…" : "Change cover"}
+          </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
       </div>
+      <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleCoverUpload} />
 
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>

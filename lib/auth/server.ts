@@ -43,8 +43,3 @@ export async function getUser() {
   } = await supabase.auth.getUser();
   return user;
 }
-
-export async function signInAnonymously() {
-  const supabase = await createClient();
-  return supabase.auth.signInAnonymously();
-}

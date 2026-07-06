@@ -17,7 +17,7 @@ const bottomItems = [
 
 function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
-  const { isAnonymous, user } = useAuth();
+  const { user } = useAuth();
 
   return (
     <>
@@ -30,7 +30,11 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
 
       <nav className="flex-1 space-y-1">
         {navItems.map((item) => {
-          const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+          const isActive = item.href === "/trips"
+            ? (pathname === "/trips" || (pathname.startsWith("/trips/") && !pathname.startsWith("/trips/new")))
+            : item.href === "/trips/new"
+            ? (pathname === "/trips/new")
+            : (pathname === item.href || pathname.startsWith(item.href + "/"));
           return (
             <Link
               key={item.href}
@@ -61,7 +65,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
             <span className="text-body-md">{item.label}</span>
           </Link>
         ))}
-        {!isAnonymous && user && (
+        {user && (
           <button
             onClick={async () => {
               const { signOut } = await import("@/lib/auth/client");
