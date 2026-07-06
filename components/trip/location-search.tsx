@@ -8,10 +8,7 @@ interface LocationSearchProps {
   placeholder?: string;
 }
 
-export function LocationSearch({
-  onSelect,
-  placeholder = "Search for a destination…",
-}: LocationSearchProps) {
+export function LocationSearch({ onSelect, placeholder = "Search for a destination…" }: LocationSearchProps) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<GeocodeResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -21,9 +18,7 @@ export function LocationSearch({
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
+      if (ref.current && !ref.current.contains(e.target as Node)) setIsOpen(false);
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -32,24 +27,14 @@ export function LocationSearch({
   function handleInput(value: string) {
     setQuery(value);
     if (timerRef.current) clearTimeout(timerRef.current);
-
-    if (value.trim().length < 2) {
-      setResults([]);
-      setIsOpen(false);
-      return;
-    }
-
+    if (value.trim().length < 2) { setResults([]); setIsOpen(false); return; }
     timerRef.current = setTimeout(async () => {
       setLoading(true);
       try {
         const data = await searchLocations(value);
         setResults(data);
         setIsOpen(data.length > 0);
-      } catch {
-        setResults([]);
-      } finally {
-        setLoading(false);
-      }
+      } catch { setResults([]); } finally { setLoading(false); }
     }, 300);
   }
 
@@ -61,32 +46,14 @@ export function LocationSearch({
 
   return (
     <div ref={ref} className="relative">
-      <label className="block text-sm font-medium text-zinc-700">
-        Destination
-      </label>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => handleInput(e.target.value)}
-        onFocus={() => results.length > 0 && setIsOpen(true)}
-        placeholder={placeholder}
-        className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
-      />
-      {loading && (
-        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-400">
-          Searching…
-        </span>
-      )}
+      <label className="block text-label-md text-text-secondary mb-1">Destination</label>
+      <input type="text" value={query} onChange={(e) => handleInput(e.target.value)} onFocus={() => results.length > 0 && setIsOpen(true)} placeholder={placeholder}
+        className="w-full px-3 py-2 border border-border-subtle rounded text-body-md text-primary bg-bg-canvas focus:border-primary focus:outline-none transition-soft" />
+      {loading && <span className="absolute right-3 top-1/2 -translate-y-1/2 text-label-md text-text-secondary">Searching…</span>}
       {isOpen && results.length > 0 && (
-        <ul className="absolute z-10 mt-1 max-h-48 w-full overflow-y-auto rounded-lg border border-zinc-200 bg-white shadow-lg">
+        <ul className="absolute z-10 mt-1 max-h-48 w-full overflow-y-auto rounded-lg border border-border-subtle bg-bg-canvas shadow-lg">
           {results.map((r, i) => (
-            <li
-              key={i}
-              onClick={() => handleSelect(r)}
-              className="cursor-pointer px-3 py-2 text-sm text-zinc-700 hover:bg-teal-50"
-            >
-              {r.displayName}
-            </li>
+            <li key={i} onClick={() => handleSelect(r)} className="cursor-pointer px-3 py-2 text-body-md text-text-secondary hover:bg-hover-fill transition-colors">{r.displayName}</li>
           ))}
         </ul>
       )}

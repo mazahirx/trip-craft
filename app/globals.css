@@ -1,12 +1,143 @@
 @import "tailwindcss";
 
-:root {
-  --background: #fafafa;
-  --foreground: #18181b;
+@theme {
+  --color-bg-canvas: #FFFFFF;
+  --color-surface: #F9F9F9;
+  --color-surface-dim: #DADADA;
+  --color-surface-bright: #F9F9F9;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F3F3F3;
+  --color-surface-container: #EEEEEE;
+  --color-surface-container-high: #E8E8E8;
+  --color-surface-container-highest: #E2E2E2;
+  --color-on-surface: #1A1C1C;
+  --color-on-surface-variant: #4C4546;
+  --color-primary: #000000;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #1B1B1B;
+  --color-on-primary-container: #848484;
+  --color-secondary: #5E5E5E;
+  --color-on-secondary: #FFFFFF;
+  --color-text-secondary: #5F5E5B;
+  --color-text-main: #1A1A1A;
+  --color-border-subtle: #EBEBEB;
+  --color-border-muted: #D1D1D1;
+  --color-hover-fill: #EFEFEF;
+  --color-status-success: #1976D2;
+  --color-error: #BA1A1A;
+  --color-error-container: #FFDAD6;
+  --color-on-error: #FFFFFF;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Courier Prime", ui-monospace, monospace;
+
+  --text-display: 40px;
+  --text-display--line-height: 48px;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 700;
+  --text-headline-lg: 30px;
+  --text-headline-lg--line-height: 36px;
+  --text-headline-lg--letter-spacing: -0.01em;
+  --text-headline-lg--font-weight: 600;
+  --text-headline-lg-mobile: 24px;
+  --text-headline-lg-mobile--line-height: 30px;
+  --text-headline-lg-mobile--font-weight: 600;
+  --text-headline-md: 20px;
+  --text-headline-md--line-height: 28px;
+  --text-headline-md--font-weight: 600;
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 24px;
+  --text-body-lg--font-weight: 400;
+  --text-body-md: 14px;
+  --text-body-md--line-height: 20px;
+  --text-body-md--font-weight: 400;
+  --text-label-md: 12px;
+  --text-label-md--line-height: 16px;
+  --text-label-md--letter-spacing: 0.02em;
+  --text-label-md--font-weight: 500;
+  --text-code: 13px;
+  --text-code--line-height: 18px;
+  --text-code--font-weight: 400;
+
+  --radius-sm: 0.125rem;
+  --radius-default: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 9999px;
+
+  --spacing-base: 4px;
+  --spacing-gap-xs: 4px;
+  --spacing-gap-sm: 8px;
+  --spacing-gap-md: 16px;
+  --spacing-gap-lg: 24px;
+  --spacing-margin-page: 48px;
+  --spacing-margin-mobile: 16px;
+  --spacing-max-width-content: 900px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-canvas);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  vertical-align: middle;
+}
+
+.hairline-border {
+  border-bottom: 0.5px solid var(--color-border-subtle);
+}
+
+.vertical-line {
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  bottom: -24px;
+  width: 2px;
+  background-color: var(--color-border-subtle);
+}
+
+.itinerary-item:last-child .vertical-line {
+  display: none;
+}
+
+.itinerary-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background-color: var(--color-border-subtle);
+}
+
+.transition-soft {
+  transition: all 0.2s ease-in-out;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-subtle);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-muted);
 }
