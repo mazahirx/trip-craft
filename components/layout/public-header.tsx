@@ -14,7 +14,7 @@ export function PublicHeader() {
             TripCraft
           </Link>
         </div>
-        <div className="hidden md:flex items-center gap-spacing-gap-lg">
+        <div className="hidden md:flex items-center gap-4 gap-spacing-gap-lg">
           <Link
             href="/trips"
             className="text-text-secondary text-body-md hover:text-primary transition-soft"
@@ -33,7 +33,7 @@ export function PublicHeader() {
               </Link>
               <Link
                 href="/auth/login"
-                className="bg-primary text-on-primary px-spacing-gap-md py-spacing-gap-sm rounded-lg text-label-md font-medium hover:opacity-90 transition-soft"
+                className="bg-primary text-on-primary px-3 py-2 px-spacing-gap-md py-spacing-gap-sm rounded-lg text-label-md font-medium hover:opacity-90 transition-soft"
               >
                 Launch App
               </Link>
