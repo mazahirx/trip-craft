@@ -35,7 +35,7 @@ export function TripCreator() {
   }, [title, startDate, endDate, router, setTrip]);
 
   return (
-    <div className="space-y-spacing-gap-md">
+    <div className="space-y-gap-md">
       <div>
         <label htmlFor="title" className="block text-label-md text-text-secondary mb-1">Trip title</label>
         <input

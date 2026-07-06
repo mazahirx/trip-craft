@@ -19,7 +19,7 @@ export function CompanionManager() {
   }
 
   return (
-    <div className="border border-border-subtle rounded-lg bg-surface p-spacing-gap-md">
+    <div className="border border-border-subtle rounded-lg bg-surface p-gap-md">
       <div className="flex items-center justify-between">
         <h2 className="text-headline-md text-primary">Companions ({companions.length})</h2>
         <button type="button" onClick={() => setShowForm(true)} className="bg-primary text-on-primary px-3 py-1.5 rounded text-label-md font-medium hover:opacity-90 transition-opacity">Add companion</button>

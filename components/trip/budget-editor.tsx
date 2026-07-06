@@ -28,7 +28,7 @@ export function BudgetEditor({ tripId }: { tripId: string }) {
   const total = budgetItems.reduce((sum, item) => sum + Number(item.amount), 0);
 
   return (
-    <section className="border border-border-subtle rounded-lg bg-surface p-spacing-gap-md">
+    <section className="border border-border-subtle rounded-lg bg-surface p-gap-md">
       <div className="flex items-center justify-between">
         <h2 className="text-headline-md text-primary">Budget — ${total.toFixed(2)}</h2>
         <button type="button" onClick={() => setShowForm(true)} className="bg-primary text-on-primary px-3 py-1.5 rounded text-label-md font-medium hover:opacity-90 transition-opacity">Add item</button>

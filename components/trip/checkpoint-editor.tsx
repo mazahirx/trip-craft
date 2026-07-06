@@ -32,7 +32,7 @@ export function CheckpointEditor({ tripId }: { tripId: string }) {
   return (
     <div className="space-y-0 relative">
       {checkpoints.map((cp) => (
-        <div key={cp.id} className="itinerary-item group relative flex gap-spacing-gap-lg pb-12">
+        <div key={cp.id} className="itinerary-item group relative flex gap-gap-lg pb-8 md:pb-12">
           <div className="vertical-line" />
           <div className="relative z-10">
             <div className="w-6 h-6 rounded-full bg-primary border-4 border-bg-canvas ring-1 ring-border-subtle flex items-center justify-center">
@@ -42,7 +42,7 @@ export function CheckpointEditor({ tripId }: { tripId: string }) {
           <div className="flex-grow pt-0.5 min-w-0">
             <div className="flex justify-between items-start mb-2 gap-2">
               <div className="min-w-0">
-                <h4 className="text-headline-md font-bold text-primary truncate">{cp.locationName}</h4>
+                <h4 className="text-body-lg md:text-headline-md font-bold text-primary truncate">{cp.locationName}</h4>
                 <span className="text-text-secondary text-label-md">
                   {cp.arrivalDate
                     ? `${new Date(cp.arrivalDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })}${cp.departureDate ? ` — ${new Date(cp.departureDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })}` : ""}`
@@ -55,15 +55,15 @@ export function CheckpointEditor({ tripId }: { tripId: string }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-spacing-gap-md mt-4">
-              <div className="p-4 border border-border-subtle rounded-lg hover:border-border-muted transition-colors bg-surface-container-lowest">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-gap-md mt-4">
+              <div className="p-3 md:p-4 border border-border-subtle rounded-lg hover:border-border-muted transition-colors bg-surface-container-lowest">
                 <div className="flex items-center gap-2 mb-2 text-text-secondary">
                   <span className="material-symbols-outlined text-[18px]">hotel</span>
                   <span className="text-label-md font-semibold uppercase tracking-wider">Lodging</span>
                 </div>
                 <p className="text-body-md text-text-secondary italic">{cp.stays?.length ? cp.stays[0].name : "No lodging set"}</p>
               </div>
-              <div className="p-4 border border-border-subtle rounded-lg hover:border-border-muted transition-colors bg-surface-container-lowest">
+              <div className="p-3 md:p-4 border border-border-subtle rounded-lg hover:border-border-muted transition-colors bg-surface-container-lowest">
                 <div className="flex items-center gap-2 mb-2 text-text-secondary">
                   <span className="material-symbols-outlined text-[18px]">edit_note</span>
                   <span className="text-label-md font-semibold uppercase tracking-wider">Notes</span>
@@ -75,7 +75,7 @@ export function CheckpointEditor({ tripId }: { tripId: string }) {
         </div>
       ))}
 
-      <div className="relative flex gap-spacing-gap-lg group">
+      <div className="relative flex gap-gap-lg group">
         <div className="relative z-10">
           <button
             type="button"

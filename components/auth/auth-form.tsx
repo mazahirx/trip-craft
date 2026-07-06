@@ -82,24 +82,24 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
 
   return (
     <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-      <div className="mb-spacing-gap-lg text-center">
-        <h1 className="text-display text-primary tracking-tight mb-spacing-base">TripCraft</h1>
+      <div className="mb-gap-lg text-center">
+        <h1 className="text-display text-primary tracking-tight mb-base">TripCraft</h1>
         <p className="text-body-lg text-text-secondary">
           {mode === "login" ? "Welcome back" : "Create your account"}
         </p>
       </div>
 
       {isAnonymous && mode === "signup" && (
-        <div className="w-full mb-spacing-gap-md px-spacing-gap-md py-spacing-gap-sm bg-surface border border-border-subtle rounded-lg text-body-md text-text-secondary text-center">
+        <div className="w-full mb-gap-md px-gap-md py-gap-sm bg-surface border border-border-subtle rounded-lg text-body-md text-text-secondary text-center">
           Your current trip will be saved to this account automatically.
         </div>
       )}
 
-      <div className="w-full space-y-spacing-gap-sm mb-spacing-gap-lg">
+      <div className="w-full space-y-gap-sm mb-gap-lg">
         <button
           type="button"
           onClick={handleGoogle}
-          className="w-full flex items-center justify-center gap-spacing-gap-sm px-spacing-gap-md py-spacing-gap-sm border border-border-muted rounded bg-bg-canvas text-body-md text-primary transition-soft hover:bg-hover-fill active:opacity-80"
+          className="w-full flex items-center justify-center gap-gap-sm px-gap-md py-gap-sm border border-border-muted rounded bg-bg-canvas text-body-md text-primary transition-soft hover:bg-hover-fill active:opacity-80"
         >
           <svg height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.64 9.20455C17.64 8.56636 17.5827 7.95273 17.4764 7.36364H9V10.845H13.8436C13.635 11.97 13.0009 12.9232 12.0477 13.5614V15.8195H14.9564C16.6582 14.2527 17.64 11.9455 17.64 9.20455Z" fill="#4285F4" />
@@ -111,27 +111,27 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
         </button>
       </div>
 
-      <div className="w-full flex items-center gap-spacing-gap-md mb-spacing-gap-lg">
+      <div className="w-full flex items-center gap-gap-md mb-gap-lg">
         <div className="h-px flex-grow bg-border-subtle" />
         <span className="text-label-md text-text-secondary uppercase tracking-widest">or</span>
         <div className="h-px flex-grow bg-border-subtle" />
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-spacing-gap-md">
-        <div className="space-y-spacing-base">
-          <label className="text-label-md text-text-secondary ml-spacing-base" htmlFor="email">Email</label>
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-gap-md">
+        <div className="space-y-base">
+          <label className="text-label-md text-text-secondary ml-base" htmlFor="email">Email</label>
           <input
             id="email"
             type="email"
             autoComplete="email"
             placeholder="Enter your email address..."
-            className="w-full px-spacing-gap-md py-spacing-gap-sm border border-border-subtle rounded text-body-md text-primary bg-bg-canvas transition-soft focus:border-primary focus:outline-none"
+            className="w-full px-gap-md py-gap-sm border border-border-subtle rounded text-body-md text-primary bg-bg-canvas transition-soft focus:border-primary focus:outline-none"
             {...register("email")}
           />
           {errors.email && <p className="text-xs text-error mt-1">{errors.email.message}</p>}
         </div>
-        <div className="space-y-spacing-base">
-          <div className="flex justify-between items-center px-spacing-base">
+        <div className="space-y-base">
+          <div className="flex justify-between items-center px-base">
             <label className="text-label-md text-text-secondary" htmlFor="password">Password</label>
           </div>
           <input
@@ -139,7 +139,7 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
             type="password"
             autoComplete={mode === "login" ? "current-password" : "new-password"}
             placeholder="Enter your password..."
-            className="w-full px-spacing-gap-md py-spacing-gap-sm border border-border-subtle rounded text-body-md text-primary bg-bg-canvas transition-soft focus:border-primary focus:outline-none"
+            className="w-full px-gap-md py-gap-sm border border-border-subtle rounded text-body-md text-primary bg-bg-canvas transition-soft focus:border-primary focus:outline-none"
             {...register("password")}
           />
           {errors.password && <p className="text-xs text-error mt-1">{errors.password.message}</p>}
@@ -150,20 +150,20 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-spacing-gap-sm bg-primary text-on-primary text-body-md rounded transition-soft hover:opacity-90 active:opacity-80 disabled:opacity-50"
+          className="w-full py-gap-sm bg-primary text-on-primary text-body-md rounded transition-soft hover:opacity-90 active:opacity-80 disabled:opacity-50"
         >
           {loading ? "Please wait…" : mode === "login" ? "Continue" : "Create account"}
         </button>
       </form>
 
-      <footer className="mt-spacing-gap-lg pt-spacing-gap-lg border-t border-border-subtle w-full text-center">
-        <p className="text-body-md text-text-secondary mb-spacing-gap-sm">
+      <footer className="mt-gap-lg pt-gap-lg border-t border-border-subtle w-full text-center">
+        <p className="text-body-md text-text-secondary mb-gap-sm">
           {mode === "login" ? "New to TripCraft?" : "Already have an account?"}
         </p>
         <button
           type="button"
           onClick={() => setMode(mode === "login" ? "signup" : "login")}
-          className="inline-flex items-center gap-spacing-gap-xs text-body-md text-primary hover:underline decoration-1 underline-offset-4 transition-soft group"
+          className="inline-flex items-center gap-gap-xs text-body-md text-primary hover:underline decoration-1 underline-offset-4 transition-soft group"
         >
           {mode === "login" ? "Start planning anonymously" : "Sign in"}
           <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
