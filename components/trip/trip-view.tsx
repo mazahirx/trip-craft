@@ -40,19 +40,16 @@ export function TripView({ tripId }: { tripId: string }) {
     if (!file || !trip) return;
     setUploading(true);
     try {
-      const { createClient } = await import("@/lib/db/supabase-client");
-      const supabase = createClient();
-      await supabase.auth.getUser();
-      const ext = file.name.split(".").pop();
-      const filePath = `${trip.id}/cover.${ext}`;
-      const { data, error: uploadError } = await supabase.storage
-        .from("trip-covers")
-        .upload(filePath, file, { upsert: true });
-      if (uploadError) throw uploadError;
-      const { data: { publicUrl } } = supabase.storage
-        .from("trip-covers")
-        .getPublicUrl(data.path);
-      setCoverImage(publicUrl);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("tripId", trip.id);
+      const res = await fetch("/api/upload", { method: "POST", body: formData });
+      if (!res.ok) {
+        const { error } = await res.json();
+        throw new Error(error || "Upload failed");
+      }
+      const { url } = await res.json();
+      setCoverImage(url);
     } catch (err) {
       console.error("Upload failed:", err);
     } finally {
