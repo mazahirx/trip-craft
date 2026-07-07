@@ -67,7 +67,7 @@ export default function BudgetPage() {
             <span className="text-label-md text-text-secondary tracking-widest uppercase">Total Estimated Expenditure</span>
             <div className="flex items-baseline gap-gap-sm">
               <span className="text-headline-lg md:text-display text-primary">${total.toFixed(2)}</span>
-              <span className="text-status-success text-label-md flex items-center gap-gap-xs">
+              <span className="text-accent-green text-label-md flex items-center gap-gap-xs">
                 <span className="material-symbols-outlined text-[14px]">trending_down</span>
                 On track
               </span>
@@ -94,7 +94,7 @@ export default function BudgetPage() {
             <button
               type="button"
               onClick={() => setShowModal(true)}
-              className="flex items-center justify-center gap-gap-xs px-4 py-2 bg-primary text-on-primary rounded text-body-md hover:opacity-90 transition-all"
+              className="flex items-center justify-center gap-gap-xs px-4 py-2 bg-accent-green text-accent-green-on rounded text-body-md hover:opacity-90 transition-all"
             >
               <span className="material-symbols-outlined text-[18px]">add</span>
               Add Item
@@ -116,7 +116,7 @@ export default function BudgetPage() {
                     <tr key={item.id} className="hairline-border group hover:bg-hover-fill transition-colors">
                       <td className="py-4 pr-4">
                         <div className="flex items-center gap-gap-sm">
-                          <div className="w-2 h-2 rounded-full bg-primary-container shrink-0" />
+                          <div className="w-2 h-2 rounded-full bg-accent-sky shrink-0" />
                           <div className="min-w-0">
                             <span className="text-body-md block truncate">{item.description}</span>
                             <span className="text-label-md text-text-secondary sm:hidden">{item.category}</span>
@@ -171,7 +171,7 @@ export default function BudgetPage() {
                   <input type="number" step="0.01" value={newAmount} onChange={(e) => setNewAmount(e.target.value)} className="w-full px-3 py-2 border border-border-subtle focus:border-primary outline-none rounded text-body-md" placeholder="0.00" />
                 </div>
               </div>
-              <button type="submit" className="w-full bg-primary text-on-primary py-3 rounded font-semibold hover:opacity-90 transition-all mt-4">Add Expense Item</button>
+              <button type="submit" className="w-full bg-accent-sky text-accent-sky-on py-3 rounded font-semibold hover:opacity-90 transition-all mt-4">Add Expense Item</button>
             </form>
           </div>
         </div>

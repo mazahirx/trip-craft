@@ -35,8 +35,8 @@ export function CheckpointEditor({ tripId }: { tripId: string }) {
         <div key={cp.id} className="itinerary-item group relative flex gap-gap-lg pb-8 md:pb-12">
           <div className="vertical-line" />
           <div className="relative z-10">
-            <div className="w-6 h-6 rounded-full bg-primary border-4 border-bg-canvas ring-1 ring-border-subtle flex items-center justify-center">
-              <span className="material-symbols-outlined text-[14px] text-on-primary">drag_indicator</span>
+            <div className="w-6 h-6 rounded-full bg-accent-sky border-4 border-bg-canvas ring-1 ring-border-subtle flex items-center justify-center">
+              <span className="material-symbols-outlined text-[14px] text-accent-sky-on">drag_indicator</span>
             </div>
           </div>
           <div className="flex-grow pt-0.5 min-w-0">

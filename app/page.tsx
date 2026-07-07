@@ -1,34 +1,42 @@
 import { AppShell } from "@/components/layout/app-shell";
 import { PlanTripButton } from "@/components/auth/plan-trip-button";
+import { HeroIllustration } from "@/components/svg/hero-illustration";
+import { AbstractDots } from "@/components/svg/abstract-dots";
 import Link from "next/link";
 export default function HomePage() {
   return (
     <AppShell>
-      <section className="max-w-max-width-content mx-auto px-margin-mobile md:px-margin-page pt-24 md:pt-32 pb-gap-lg text-center md:text-left">
-        <div className="flex flex-col gap-3 gap-gap-md mb-16 md:mb-24">
-          <h1 className="text-headline-lg md:text-display leading-tight tracking-tight text-primary max-w-2xl">
-            Let&apos;s make a plan and cancel it together.
-          </h1>
-          <p className="text-body-lg text-text-secondary max-w-lg">
-            Remember, when last time did you actually turned a plan into trip. Let&apos;s create another trip plan but with a system.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 gap-gap-sm mt-gap-md justify-center md:justify-start">
-            <PlanTripButton />
-            <Link 
-              href="#features"
-              className="bg-bg-canvas border border-zinc-600 text-primary px-8 md:px-10 py-3 md:py-4 rounded-lg text-headline-md hover:bg-hover-fill transition-soft text-center"
-            >
-              View Demo
-            </Link>
+      <section className="relative max-w-max-width-content mx-auto px-margin-mobile md:px-margin-page pt-24 md:pt-32 pb-gap-lg">
+        <AbstractDots className="absolute top-8 right-4 w-32 h-20 opacity-60 hidden md:block" />
+        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+          <div className="flex-1 text-center md:text-left">
+            <h1 className="text-headline-lg md:text-display leading-tight tracking-tight text-primary max-w-2xl animate-in-up">
+              Let&apos;s make a plan and cancel it together.
+            </h1>
+            <p className="text-body-lg text-text-secondary max-w-lg mt-4 animate-in-up" style={{ animationDelay: "100ms" }}>
+              Remember, when last time did you actually turned a plan into trip. Let&apos;s create another trip plan but with a system.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 gap-gap-sm mt-gap-md justify-center md:justify-start animate-in-up" style={{ animationDelay: "200ms" }}>
+              <PlanTripButton />
+              <Link
+                href="#features"
+                className="bg-accent-orange text-accent-orange-on px-8 md:px-10 py-3 md:py-4 rounded-lg text-headline-md hover:opacity-90 transition-soft text-center"
+              >
+                View Demo
+              </Link>
+            </div>
+          </div>
+          <div className="flex-shrink-0 animate-scale-in">
+            <HeroIllustration />
           </div>
         </div>
       </section>
 
-      <section id="features" className="bg-surface py-20 md:py-32 ">
+      <section id="features" className="bg-surface py-20 md:py-32">
         <div className="max-w-max-width-content mx-auto px-margin-mobile md:px-margin-page">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            <div className="flex flex-col gap-0.5 gap-gap-sm">
-              <div className="w-10 h-10 flex items-center justify-center rounded bg-primary text-on-primary mb-base">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 animate-stagger">
+            <div className="flex flex-col gap-0.5 gap-gap-sm animate-in-up">
+              <div className="w-10 h-10 flex items-center justify-center rounded bg-accent-green text-accent-green-on mb-base">
                 <span className="material-symbols-outlined">group</span>
               </div>
               <h3 className="text-headline-md text-primary">Add Companions</h3>
@@ -36,8 +44,8 @@ export default function HomePage() {
                 Add the trip members in the planning. Authorize them to make changes in the plan and share your thoughts.
               </p>
             </div>
-            <div className="flex flex-col gap-0.5 gap-gap-sm">
-              <div className="w-10 h-10 flex items-center justify-center rounded bg-primary text-on-primary mb-base">
+            <div className="flex flex-col gap-0.5 gap-gap-sm animate-in-up">
+              <div className="w-10 h-10 flex items-center justify-center rounded bg-accent-yellow text-accent-yellow-on mb-base">
                 <span className="material-symbols-outlined">payments</span>
               </div>
               <h3 className="text-headline-md text-primary">Budget Tracking</h3>
@@ -45,8 +53,8 @@ export default function HomePage() {
                 Allocate a budget for the trip. Track every penny you reserved for the trip. Never go out of budget again.
               </p>
             </div>
-            <div className="flex flex-col gap-0.5 gap-gap-sm">
-              <div className="w-10 h-10 flex items-center justify-center rounded bg-primary text-on-primary mb-base">
+            <div className="flex flex-col gap-0.5 gap-gap-sm animate-in-up">
+              <div className="w-10 h-10 flex items-center justify-center rounded bg-accent-sky text-accent-sky-on mb-base">
                 <span className="material-symbols-outlined">privacy</span>
               </div>
               <h3 className="text-headline-md text-primary">No Monitoring</h3>
@@ -60,7 +68,7 @@ export default function HomePage() {
 
       <section className="py-20 md:py-32">
         <div className="max-w-max-width-content mx-auto px-margin-mobile md:px-margin-page">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl animate-in">
             <span className="text-label-md text-text-secondary tracking-widest uppercase mb-gap-sm block">Why I built this?</span>
             <h2 className="text-headline-lg text-primary my-1 mb-gap-md">
               TripCraft is built on the belief that planning should be as enjoyable as the journey itself.
@@ -75,7 +83,7 @@ export default function HomePage() {
               </div>
               <div>
                 <p className="text-body-md text-primary font-semibold">Privacy First</p>
-                <p className="text-body-md text-text-secondary">Your data belongs to you. Export to Markdown or PDF anytime.</p>  
+                <p className="text-body-md text-text-secondary">Your data belongs to you. Export to Markdown or PDF anytime.</p>
               </div>
             </div>
           </div>
@@ -102,13 +110,13 @@ export default function HomePage() {
               </div>
             </div>
             <div className="w-full md:w-auto">
-              <Link href="/trips/new" className="block w-full md:w-auto bg-primary text-on-primary px-gap-lg px-3 py-2 py-gap-sm rounded-lg text-label-md hover:opacity-90 transition-soft text-center">
+              <Link href="/trips/new" className="block w-full md:w-auto bg-accent-sky text-accent-sky-on px-gap-lg px-3 py-2 py-gap-sm rounded-lg text-label-md hover:opacity-90 transition-soft text-center">
                 Launch App
               </Link>
             </div>
           </div>
           <div className="mt-16 md:mt-20 pt-8 border-t border-border-subtle flex flex-col md:flex-row justify-between items-center gap-gap-sm">
-            <p className="text-label-md text-text-secondary">Open Sourced for anyone to contribute. 
+            <p className="text-label-md text-text-secondary">Open Sourced for anyone to contribute.
             </p>
           </div>
         </div>

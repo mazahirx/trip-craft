@@ -24,7 +24,7 @@ export default function CollaborationPage() {
                   <span className="material-symbols-outlined text-text-secondary">edit</span>
                   <span className="text-label-md uppercase tracking-wider">Editor Link</span>
                 </div>
-                <span className="h-2 w-2 rounded-full bg-status-success" />
+                <span className="h-2 w-2 rounded-full bg-accent-green" />
               </div>
               <p className="text-body-md text-text-secondary mb-gap-md">Full permission to add, move, or delete itinerary blocks.</p>
               <div className="flex items-center gap-gap-xs">
@@ -64,7 +64,7 @@ export default function CollaborationPage() {
             {members.map((m) => (
               <div key={m.email} className="flex flex-col sm:flex-row sm:items-center justify-between p-gap-md gap-3 hover:bg-surface transition-colors">
                 <div className="flex items-center gap-gap-md">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-on-primary font-bold overflow-hidden shrink-0">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center bg-accent-sky text-accent-sky-on font-bold overflow-hidden shrink-0">
                     {m.online ? (
                       <span className="text-sm">{m.name.charAt(0)}</span>
                     ) : (
@@ -112,7 +112,7 @@ export default function CollaborationPage() {
                 <div className="flex items-center h-6 shrink-0">
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" defaultChecked={setting.checked} className="sr-only peer" />
-                    <div className="w-11 h-6 bg-surface-container border border-border-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary" />
+                    <div className="w-11 h-6 bg-surface-container border border-border-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent-sky" />
                   </label>
                 </div>
               </div>

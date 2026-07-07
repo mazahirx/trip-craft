@@ -20,7 +20,7 @@ export function SidebarLayout({
       <Sidebar />
       <TopBarWrapper title={title} breadcrumb={breadcrumb} actions={actions} />
       <main className="pt-16 pb-24 px-margin-mobile md:ml-64 md:px-margin-page">
-        <div className="mx-auto mt-8 md:mt-12" style={{ maxWidth: "900px" }}>
+        <div className="mx-auto mt-8 md:mt-12 animate-in" style={{ maxWidth: "900px" }}>
           {children}
         </div>
       </main>

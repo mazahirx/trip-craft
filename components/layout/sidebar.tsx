@@ -100,7 +100,7 @@ export function Sidebar() {
         </div>
       )}
       <button
-        className="fixed bottom-4 left-4 z-40 md:hidden bg-primary text-on-primary p-3 rounded-full shadow-lg hover:opacity-90 transition-opacity"
+        className="fixed bottom-4 left-4 z-40 md:hidden bg-accent-sky text-accent-sky-on p-3 rounded-full shadow-lg hover:opacity-90 transition-opacity"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label="Toggle navigation"
       >

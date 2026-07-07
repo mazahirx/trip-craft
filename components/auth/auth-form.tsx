@@ -10,14 +10,22 @@ import {
   signInWithGoogle,
   signUpWithEmail,
 } from "@/lib/auth/client";
+import { createClient } from "@/lib/db/supabase-client";
+import { Spinner } from "@/components/ui/spinner";
 
-const authSchema = z.object({
+const loginSchema = z.object({
+  name: z.string().optional(),
+  email: z.string().email("Enter a valid email"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
+
+const signupSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
   email: z.string().email("Enter a valid email"),
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
-type AuthFormData = z.infer<typeof authSchema>;
+type AuthFormData = z.infer<typeof loginSchema>;
 
 interface AuthFormProps {
   mode?: "login" | "signup";
@@ -31,12 +39,15 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/trips";
 
+  const schema = mode === "login" ? loginSchema : signupSchema;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<AuthFormData>({
-    resolver: zodResolver(authSchema),
+    resolver: zodResolver(schema),
+    mode: "onBlur",
   });
 
   const onSubmit = async (data: AuthFormData) => {
@@ -50,9 +61,7 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
         const { data: signUpData, error: signUpError } = await signUpWithEmail(data.email, data.password);
         if (signUpError) throw signUpError;
 
-        if (signUpData.user) {
-          // Update profile with name
-          const { createClient } = await import("@/lib/db/supabase-client");
+        if (signUpData.user && data.name) {
           const supabase = createClient();
           await supabase.from("profiles").insert({
             id: signUpData.user.id,
@@ -63,17 +72,46 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
       router.push(redirect);
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Authentication failed");
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
   };
+
+  function getErrorMessage(err: unknown): string {
+    const message = err instanceof Error ? err.message : "";
+    if (message.includes("Invalid login credentials")) return "Wrong email or password. Try again or create an account.";
+    if (message.includes("Email not confirmed")) return "Please confirm your email before signing in.";
+    if (message.includes("User already registered")) return "An account with this email already exists. Sign in instead.";
+    if (message.includes("rate_limit")) return "Too many attempts. Please wait a moment and try again.";
+    return message || "Something went wrong. Please try again.";
+  }
 
   const handleGoogle = async () => {
     setError(null);
     const { error: oauthError } = await signInWithGoogle();
     if (oauthError) setError(oauthError.message);
   };
+
+  function getSuggestionLink() {
+    const isLoginError = error?.toLowerCase().includes("wrong") || error?.toLowerCase().includes("confirm");
+    const isSignupError = error?.toLowerCase().includes("already exists");
+    if (isLoginError) {
+      return (
+        <button type="button" onClick={() => { setMode("signup"); setError(null); }} className="underline hover:no-underline">
+          Don&apos;t have an account? Sign up
+        </button>
+      );
+    }
+    if (isSignupError) {
+      return (
+        <button type="button" onClick={() => { setMode("login"); setError(null); }} className="underline hover:no-underline">
+          Already registered? Sign in
+        </button>
+      );
+    }
+    return null;
+  }
 
   return (
     <div className="flex flex-col items-center w-full max-w-sm mx-auto">
@@ -148,14 +186,21 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
           {errors.password && <p className="text-xs text-error mt-1">{errors.password.message}</p>}
         </div>
 
-        {error && <p className="text-sm text-error bg-error-container/20 px-3 py-2 rounded">{error}</p>}
+        {error && (
+          <div className="space-y-2">
+            <p className="text-sm text-error bg-error-container/20 px-3 py-2 rounded">{error}</p>
+            {getSuggestionLink() && (
+              <p className="text-sm text-text-secondary text-center">{getSuggestionLink()}</p>
+            )}
+          </div>
+        )}
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-gap-sm bg-primary text-on-primary text-body-md rounded transition-soft hover:opacity-90 active:opacity-80 disabled:opacity-50"
+          className="w-full py-gap-sm bg-accent-sky text-accent-sky-on text-body-md rounded transition-soft hover:opacity-90 active:opacity-80 disabled:opacity-50 flex items-center justify-center gap-2"
         >
-          {loading ? "Please wait…" : mode === "login" ? "Continue" : "Create account"}
+          {loading ? <Spinner /> : mode === "login" ? "Continue" : "Create account"}
         </button>
       </form>
 

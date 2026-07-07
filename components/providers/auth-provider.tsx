@@ -10,6 +10,7 @@ import {
 import { createClient } from "@/lib/db/supabase-client";
 import { useAuthStore } from "@/stores/auth-store";
 import type { User } from "@supabase/supabase-js";
+import { Spinner } from "@/components/ui/spinner";
 
 interface AuthContextValue {
   user: User | null;
@@ -76,8 +77,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50">
-        <div className="text-sm text-zinc-500">Loading TripCraft…</div>
+      <div className="flex min-h-screen items-center justify-center gap-3">
+        <Spinner className="h-6 w-6" />
+        <span className="text-body-md text-text-secondary animate-pulse">Loading TripCraft…</span>
       </div>
     );
   }

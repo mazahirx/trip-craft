@@ -31,7 +31,7 @@ export function BudgetEditor({ tripId }: { tripId: string }) {
     <section className="border border-border-subtle rounded-lg bg-surface p-gap-md">
       <div className="flex items-center justify-between">
         <h2 className="text-headline-md text-primary">Budget — ${total.toFixed(2)}</h2>
-        <button type="button" onClick={() => setShowForm(true)} className="bg-primary text-on-primary px-3 py-1.5 rounded text-label-md font-medium hover:opacity-90 transition-opacity">Add item</button>
+        <button type="button" onClick={() => setShowForm(true)} className="bg-accent-green text-accent-green-on px-3 py-1.5 rounded text-label-md font-medium hover:opacity-90 transition-opacity">Add item</button>
       </div>
       {showForm && (
         <div className="mt-4 space-y-3 border border-border-subtle rounded p-4">
@@ -48,7 +48,7 @@ export function BudgetEditor({ tripId }: { tripId: string }) {
               className="w-full px-3 py-2 border border-border-subtle rounded text-body-md text-primary bg-bg-canvas focus:border-primary focus:outline-none transition-soft" />
           </div>
           <div className="flex gap-2">
-            <button type="button" onClick={handleAdd} className="bg-primary text-on-primary px-4 py-2 rounded text-body-md font-medium hover:opacity-90 transition-opacity">Add</button>
+            <button type="button" onClick={handleAdd} className="bg-accent-green text-accent-green-on px-4 py-2 rounded text-body-md font-medium hover:opacity-90 transition-opacity">Add</button>
             <button type="button" onClick={() => setShowForm(false)} className="border border-border-subtle px-4 py-2 rounded text-body-md text-text-secondary hover:bg-hover-fill transition-colors">Cancel</button>
           </div>
         </div>

@@ -14,9 +14,12 @@ export async function searchNominatim(query: string): Promise<NominatimResult[]>
   url.searchParams.set("limit", "5");
   url.searchParams.set("addressdetails", "0");
 
+  url.searchParams.set("accept-language", "en");
+
   const res = await fetch(url.toString(), {
     headers: {
       "User-Agent": "TripCraft/1.0 (travel-planner-app)",
+      "Accept-Language": "en",
     },
     next: { revalidate: 3600 },
   });

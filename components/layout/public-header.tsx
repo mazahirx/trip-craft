@@ -47,7 +47,7 @@ export function PublicHeader() {
               </Link>
               <Link
                 href="/auth/login"
-                className="bg-primary text-on-primary px-gap-md py-gap-sm rounded-lg text-label-md font-medium hover:opacity-90 transition-soft"
+                className="bg-accent-sky text-accent-sky-on px-gap-md py-gap-sm rounded-lg text-label-md font-medium hover:opacity-90 transition-soft"
               >
                 Launch App
               </Link>
@@ -79,7 +79,7 @@ export function PublicHeader() {
           ) : (
             <>
               <Link href="/auth/login" className="block text-body-md text-text-secondary hover:text-primary transition-soft" onClick={() => setMobileOpen(false)}>Sign in</Link>
-              <Link href="/auth/login" className="block text-center bg-primary text-on-primary px-gap-md py-gap-sm rounded-lg text-label-md font-medium hover:opacity-90 transition-soft" onClick={() => setMobileOpen(false)}>Launch App</Link>
+              <Link href="/auth/login" className="block text-center bg-accent-sky text-accent-sky-on px-gap-md py-gap-sm rounded-lg text-label-md font-medium hover:opacity-90 transition-soft" onClick={() => setMobileOpen(false)}>Launch App</Link>
             </>
           )}
         </div>

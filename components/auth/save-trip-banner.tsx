@@ -17,7 +17,7 @@ export function SaveTripBanner({ checkpointCount }: SaveTripBannerProps) {
       </div>
       <Link
         href="/trips"
-        className="shrink-0 bg-primary text-on-primary px-4 py-2 rounded text-body-md font-medium hover:opacity-90 transition-opacity text-center"
+        className="shrink-0 bg-accent-sky text-accent-sky-on px-4 py-2 rounded text-body-md font-medium hover:opacity-90 transition-opacity text-center"
       >
         Back to trips
       </Link>

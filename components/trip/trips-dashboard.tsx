@@ -3,18 +3,19 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { TripWithRelations } from "@/lib/trip-utils";
-import { createClient } from "@/lib/db/supabase-client";
+import { useAuth } from "@/components/providers/auth-provider";
+import { EmptyTrips } from "@/components/svg/empty-trips";
+import { PageSpinner } from "@/components/ui/spinner";
 
 export function TripsDashboard() {
   const [trips, setTrips] = useState<TripWithRelations[]>([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
+    if (!user) { setLoading(false); return; }
     async function load() {
       try {
-        const supabase = createClient();
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) { setLoading(false); return; }
         const res = await fetch("/api/trips");
         if (res.ok) setTrips(await res.json());
       } catch {
@@ -24,11 +25,9 @@ export function TripsDashboard() {
       }
     }
     load();
-  }, []);
+  }, [user]);
 
-  if (loading) {
-    return <div className="flex items-center justify-center py-20"><span className="text-body-md text-text-secondary">Loading trips…</span></div>;
-  }
+  if (loading) return <PageSpinner text="Loading trips…" />;
 
   return (
     <div className="space-y-10 md:space-y-12">
@@ -42,17 +41,17 @@ export function TripsDashboard() {
           )}
         </div>
         {trips.length === 0 ? (
-          <div className="text-center py-12 md:py-16 border border-dashed border-border-subtle rounded-lg">
-            <span className="material-symbols-outlined text-4xl text-border-muted mb-4">map</span>
-            <p className="text-body-md text-text-secondary mb-4">No trips yet. Start planning your next adventure.</p>
-            <Link href="/trips/new" className="inline-block bg-primary text-on-primary px-6 py-2 rounded text-body-md font-medium hover:opacity-90 transition-opacity">
+          <div className="text-center py-12 md:py-16 border border-dashed border-border-subtle rounded-lg flex flex-col items-center gap-4 animate-in">
+            <EmptyTrips />
+            <p className="text-body-md text-text-secondary">No trips yet. Start planning your next adventure.</p>
+            <Link href="/trips/new" className="inline-block bg-accent-sky text-accent-sky-on px-6 py-2 rounded text-body-md font-medium hover:opacity-90 transition-opacity">
               Create your first trip
             </Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-gap-lg">
             {trips.slice(0, 4).map((trip) => (
-              <Link key={trip.id} href={`/trips/${trip.id}`} className="group cursor-pointer border border-border-subtle hover:border-primary transition-all duration-300 p-base rounded-lg">
+              <Link key={trip.id} href={`/trips/${trip.id}`} className="group cursor-pointer border border-border-subtle hover:border-accent-sky transition-all duration-300 p-base rounded-lg">
                 <div className="relative aspect-[16/9] overflow-hidden rounded mb-gap-sm bg-surface">
                   <div className="absolute inset-0 flex items-center justify-center text-text-secondary">
                     <span className="material-symbols-outlined text-3xl">map</span>
@@ -85,28 +84,28 @@ export function TripsDashboard() {
       <section>
         <div className="flex items-center justify-between mb-gap-lg">
           <h3 className="text-headline-md text-primary">Templates & Drafts</h3>
-          <Link href="/trips/new" className="bg-primary text-on-primary px-3 py-1 rounded text-label-md hover:opacity-90 transition-opacity flex items-center gap-1">
+          <Link href="/trips/new" className="bg-accent-green text-accent-green-on px-3 py-1 rounded text-label-md hover:opacity-90 transition-opacity flex items-center gap-1">
             <span className="material-symbols-outlined !text-[14px]">add</span> New Draft
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-gap-md min-h-[200px] md:h-[320px]">
           <Link href="/trips/new" className="sm:col-span-2 relative group cursor-pointer overflow-hidden rounded-lg border border-border-subtle bg-surface flex items-center justify-center">
             <div className="text-center p-6">
-              <span className="material-symbols-outlined text-4xl text-primary mb-2">auto_awesome</span>
+              <span className="material-symbols-outlined text-4xl text-accent-yellow mb-2">auto_awesome</span>
               <h5 className="text-body-lg text-primary">Quick Start</h5>
               <p className="text-text-secondary text-[12px] mt-1">Create a new trip</p>
             </div>
           </Link>
           <div className="grid grid-cols-2 sm:grid-cols-1 gap-gap-md">
             <Link href="/trips/new" className="relative group cursor-pointer overflow-hidden rounded-lg border border-border-subtle bg-surface flex flex-col justify-center items-center p-4 text-center">
-              <span className="material-symbols-outlined text-primary mb-2">auto_awesome</span>
+              <span className="material-symbols-outlined text-accent-yellow mb-2">auto_awesome</span>
               <h5 className="text-body-lg text-primary">Quick Start</h5>
               <p className="text-text-secondary text-[12px] mt-1">AI-generated itinerary</p>
             </Link>
-            <Link href="/trips/new" className="relative group cursor-pointer overflow-hidden rounded-lg border border-border-subtle bg-primary flex flex-col justify-center items-center p-4 text-center text-on-primary">
+            <Link href="/trips/new" className="relative group cursor-pointer overflow-hidden rounded-lg border border-border-subtle bg-accent-sky flex flex-col justify-center items-center p-4 text-center text-accent-sky-on">
               <span className="material-symbols-outlined mb-2">map</span>
               <h5 className="text-body-lg">Blank Map</h5>
-              <p className="text-on-primary/70 text-[12px] mt-1">Start from scratch</p>
+              <p className="text-accent-sky-on/70 text-[12px] mt-1">Start from scratch</p>
             </Link>
           </div>
         </div>

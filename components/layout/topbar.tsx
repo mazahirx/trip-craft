@@ -34,7 +34,7 @@ export function TopBar({ title, breadcrumb, actions }: TopBarProps) {
           ) : (
             <a
               href="/auth/login"
-              className="bg-primary text-on-primary px-3 md:px-4 py-1.5 rounded text-label-md md:text-body-md font-medium hover:opacity-90 transition-opacity whitespace-nowrap"
+              className="bg-accent-sky text-accent-sky-on px-3 md:px-4 py-1.5 rounded text-label-md md:text-body-md font-medium hover:opacity-90 transition-opacity whitespace-nowrap"
             >
               Sign in
             </a>

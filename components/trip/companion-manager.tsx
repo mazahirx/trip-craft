@@ -22,13 +22,13 @@ export function CompanionManager() {
     <div className="border border-border-subtle rounded-lg bg-surface p-gap-md">
       <div className="flex items-center justify-between">
         <h2 className="text-headline-md text-primary">Companions ({companions.length})</h2>
-        <button type="button" onClick={() => setShowForm(true)} className="bg-primary text-on-primary px-3 py-1.5 rounded text-label-md font-medium hover:opacity-90 transition-opacity">Add companion</button>
+        <button type="button" onClick={() => setShowForm(true)} className="bg-accent-green text-accent-green-on px-3 py-1.5 rounded text-label-md font-medium hover:opacity-90 transition-opacity">Add companion</button>
       </div>
       {showForm && (
         <div className="mt-4 flex gap-2">
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name"
             className="flex-1 px-3 py-2 border border-border-subtle rounded text-body-md text-primary bg-bg-canvas focus:border-primary focus:outline-none transition-soft" />
-          <button type="button" onClick={handleAdd} className="bg-primary text-on-primary px-4 py-2 rounded text-body-md font-medium hover:opacity-90 transition-opacity">Add</button>
+          <button type="button" onClick={handleAdd} className="bg-accent-green text-accent-green-on px-4 py-2 rounded text-body-md font-medium hover:opacity-90 transition-opacity">Add</button>
         </div>
       )}
       {companions.length === 0 && !showForm && <p className="mt-4 text-body-md text-text-secondary">No companions yet. Who are you traveling with?</p>}

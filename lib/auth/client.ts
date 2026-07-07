@@ -1,19 +1,16 @@
-export { createClient } from "@/lib/db/supabase-client";
+import { createClient } from "@/lib/db/supabase-client";
 
 export async function signUpWithEmail(email: string, password: string) {
-  const { createClient } = await import("@/lib/db/supabase-client");
   const supabase = createClient();
   return supabase.auth.signUp({ email, password });
 }
 
 export async function signInWithEmail(email: string, password: string) {
-  const { createClient } = await import("@/lib/db/supabase-client");
   const supabase = createClient();
   return supabase.auth.signInWithPassword({ email, password });
 }
 
 export async function signInWithGoogle() {
-  const { createClient } = await import("@/lib/db/supabase-client");
   const supabase = createClient();
   return supabase.auth.signInWithOAuth({
     provider: "google",
@@ -24,7 +21,6 @@ export async function signInWithGoogle() {
 }
 
 export async function signOut() {
-  const { createClient } = await import("@/lib/db/supabase-client");
   const supabase = createClient();
   return supabase.auth.signOut();
 }
