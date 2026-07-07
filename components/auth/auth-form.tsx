@@ -68,6 +68,9 @@ export function AuthForm({ mode: initialMode = "login" }: AuthFormProps) {
             display_name: data.name,
           }).maybeSingle();
         }
+
+        const { error: signInError } = await signInWithEmail(data.email, data.password);
+        if (signInError) throw signInError;
       }
       router.push(redirect);
       router.refresh();
