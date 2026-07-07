@@ -20,7 +20,7 @@ export default function HomePage() {
               <PlanTripButton />
               <Link
                 href="#features"
-                className="bg-accent-orange text-accent-orange-on px-8 md:px-10 py-3 md:py-4 rounded-lg text-headline-md hover:opacity-90 transition-soft text-center"
+                className="bg-accent-orange text-white px-7 md:px-10 py-3 md:py-4 rounded-lg text-headline-md hover:opacity-90 transition-soft text-center"
               >
                 View Demo
               </Link>
@@ -36,7 +36,7 @@ export default function HomePage() {
         <div className="max-w-max-width-content mx-auto px-margin-mobile md:px-margin-page">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 animate-stagger">
             <div className="flex flex-col gap-0.5 gap-gap-sm animate-in-up">
-              <div className="w-10 h-10 flex items-center justify-center rounded bg-accent-green text-accent-green-on mb-base">
+              <div className="w-10 h-10 flex items-center justify-center rounded bg-accent-green text-white mb-base">
                 <span className="material-symbols-outlined">group</span>
               </div>
               <h3 className="text-headline-md text-primary">Add Companions</h3>
@@ -45,7 +45,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="flex flex-col gap-0.5 gap-gap-sm animate-in-up">
-              <div className="w-10 h-10 flex items-center justify-center rounded bg-accent-yellow text-accent-yellow-on mb-base">
+              <div className="w-10 h-10 flex items-center justify-center rounded bg-accent-yellow text-white mb-base">
                 <span className="material-symbols-outlined">payments</span>
               </div>
               <h3 className="text-headline-md text-primary">Budget Tracking</h3>
@@ -54,7 +54,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="flex flex-col gap-0.5 gap-gap-sm animate-in-up">
-              <div className="w-10 h-10 flex items-center justify-center rounded bg-accent-sky text-accent-sky-on mb-base">
+              <div className="w-10 h-10 flex items-center justify-center rounded bg-accent-sky text-white mb-base">
                 <span className="material-symbols-outlined">privacy</span>
               </div>
               <h3 className="text-headline-md text-primary">No Monitoring</h3>
@@ -110,7 +110,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="w-full md:w-auto">
-              <Link href="/trips/new" className="block w-full md:w-auto bg-accent-sky text-accent-sky-on px-gap-lg px-3 py-2 py-gap-sm rounded-lg text-label-md hover:opacity-90 transition-soft text-center">
+              <Link href="/trips/new" className="block w-full md:w-auto bg-accent-sky text-white px-gap-lg px-3 py-2 py-gap-sm rounded-lg text-label-md hover:opacity-90 transition-soft text-center">
                 Launch App
               </Link>
             </div>

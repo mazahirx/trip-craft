@@ -47,7 +47,7 @@ export function PublicHeader() {
               </Link>
               <Link
                 href="/auth/login"
-                className="bg-accent-sky text-accent-sky-on px-gap-md py-gap-sm rounded-lg text-label-md font-medium hover:opacity-90 transition-soft"
+                className="bg-accent-sky text-white px-gap-md py-gap-sm rounded-lg text-label-md font-medium hover:opacity-90 transition-soft"
               >
                 Launch App
               </Link>

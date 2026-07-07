@@ -18,7 +18,7 @@ export function PlanTripButton() {
   return (
     <button
       onClick={handleClick}
-      className="bg-accent-sky text-accent-sky-on px-8 md:px-10 py-3 md:py-4 rounded-lg text-headline-md hover:cursor-pointer hover:opacity-90 transition-soft text-center"
+      className="bg-accent-sky text-white md:px-7 md:py-4 rounded-lg text-headline-md hover:cursor-pointer hover:opacity-90 transition-soft text-center"
     >
       Plan a Trip for Free
     </button>
