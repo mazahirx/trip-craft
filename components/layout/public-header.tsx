@@ -17,6 +17,15 @@ export function PublicHeader() {
           </Link>
         </div>
         <div className="hidden md:flex items-center gap-4 gap-gap-lg">
+          <a
+            href="https://github.com/mazahirx/trip-craft"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-text-secondary text-body-md hover:text-primary transition-soft"
+          >
+            <span className="material-symbols-outlined text-[18px]">star</span>
+            Star
+          </a>
           <Link
             href="/trips"
             className="text-text-secondary text-body-md hover:text-primary transition-soft"
@@ -60,6 +69,10 @@ export function PublicHeader() {
       </nav>
       {mobileOpen && (
         <div className="md:hidden bg-bg-canvas border-b border-border-subtle px-margin-mobile py-gap-md space-y-gap-sm">
+          <a href="https://github.com/mazahirx/trip-craft" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-body-md text-text-secondary hover:text-primary transition-soft">
+            <span className="material-symbols-outlined text-[18px]">star</span>
+            Star
+          </a>
           <Link href="/trips" className="block text-body-md text-text-secondary hover:text-primary transition-soft" onClick={() => setMobileOpen(false)}>My Trips</Link>
           {user ? (
             <div className="flex flex-col gap-2">

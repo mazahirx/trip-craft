@@ -13,6 +13,7 @@ const navItems = [
 
 const bottomItems = [
   { href: "/help", icon: "help", label: "Help" },
+  { href: "https://github.com/mazahirx/trip-craft", icon: "star", label: "Star on GitHub", external: true },
 ];
 
 function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
@@ -54,17 +55,30 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
       </nav>
 
       <div className="pt-gap-lg border-t border-border-subtle space-y-1">
-        {bottomItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={onNavigate}
-            className="flex items-center gap-gap-sm px-3 py-2 rounded transition-colors text-text-secondary hover:bg-hover-fill hover:text-primary"
-          >
-            <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
-            <span className="text-body-md">{item.label}</span>
-          </Link>
-        ))}
+        {bottomItems.map((item) =>
+          item.external ? (
+            <a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-gap-sm px-3 py-2 rounded transition-colors text-text-secondary hover:bg-hover-fill hover:text-primary"
+            >
+              <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+              <span className="text-body-md">{item.label}</span>
+            </a>
+          ) : (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onNavigate}
+              className="flex items-center gap-gap-sm px-3 py-2 rounded transition-colors text-text-secondary hover:bg-hover-fill hover:text-primary"
+            >
+              <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+              <span className="text-body-md">{item.label}</span>
+            </Link>
+          )
+        )}
         {user && (
           <button
             onClick={async () => {

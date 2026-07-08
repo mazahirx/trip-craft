@@ -118,6 +118,15 @@ export default function HomePage() {
           <div className="mt-16 md:mt-20 pt-8 border-t border-border-subtle flex flex-col md:flex-row justify-between items-center gap-gap-sm">
             <p className="text-label-md text-text-secondary">Open Sourced for anyone to contribute.
             </p>
+            <a
+              href="https://github.com/mazahirx/trip-craft"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-label-md text-text-secondary hover:text-primary transition-soft"
+            >
+              <span className="material-symbols-outlined text-[16px]">star</span>
+              Star on GitHub
+            </a>
           </div>
         </div>
       </footer>

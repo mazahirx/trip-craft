@@ -28,6 +28,15 @@ export function TopBar({ title, breadcrumb, actions }: TopBarProps) {
           <h2 className="text-body-lg md:text-headline-md font-bold text-primary truncate">{title}</h2>
         </div>
         <div className="flex items-center gap-gap-md shrink-0">
+          <a
+            href="https://github.com/mazahirx/trip-craft"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:flex items-center gap-1 text-text-secondary text-body-md hover:text-primary transition-soft"
+          >
+            <span className="material-symbols-outlined text-[18px]">star</span>
+            Star
+          </a>
           {actions}
           {user ? (
             <span className="hidden sm:inline text-label-md text-text-secondary truncate max-w-[120px]">{user.email}</span>
